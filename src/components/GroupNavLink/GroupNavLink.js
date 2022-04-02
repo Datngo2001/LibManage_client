@@ -1,23 +1,25 @@
 import React from 'react'
+import NavLink from '../NavLink/NavLink'
 
 function GroupNavLink(prop) {
-    console.log(prop)
     const navLinkElements = prop.navLinks.map((navLink) => {
-        return <a key={navLink.name} href={navLink.link} className="list-group-item list-group-item-action text-start"><i className={navLink.icon}></i> {navLink.name}</a>
+        return <NavLink key={navLink.name} link={navLink.link} icon={navLink.icon} name={navLink.name}></NavLink>
     })
     return (
-        <div className="accordion-item">
-            <h2 className="accordion-header" id={`heading${prop.groupId}`}>
-                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${prop.groupId}`} aria-expanded="true" aria-controls={`collapse${prop.groupId}`}>
-                    {prop.title}
-                </button>
-            </h2>
-            <div id={`collapse${prop.groupId}`} className="accordion-collapse collapse show" aria-labelledby={`heading${prop.groupId}`} data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    {navLinkElements}
+        <div className="accordion" >
+            <div className="accordion-item mb-2">
+                <h2 className="accordion-header" id={`heading${prop.groupId}`}>
+                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${prop.groupId}`} aria-expanded="false" aria-controls={`collapse${prop.groupId}`}>
+                        {prop.title}
+                    </button>
+                </h2>
+                <div id={`collapse${prop.groupId}`} className="accordion-collapse collapse" aria-labelledby={`heading${prop.groupId}`}>
+                    <div className="accordion-body">
+                        {navLinkElements}
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -1,10 +1,8 @@
 import React from 'react';
-import './home.scss';
+import './home.css';
 
 export default function Home() {
     return (
-        <React.Fragment>
-            <h1>This is home</h1>
-        </React.Fragment>
+        <h1>Home</h1>
     )
 }

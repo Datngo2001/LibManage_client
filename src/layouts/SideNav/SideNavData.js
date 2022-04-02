@@ -1,5 +1,10 @@
 export default [
     {
+        name: 'Home',
+        icon: 'fas fa-home',
+        link: '/'
+    },
+    {
         groupName: 'System management',
         icon: 'fas fa-solar-system',
         navLinks: [
