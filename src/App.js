@@ -19,8 +19,16 @@ function App() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    const cookie = Cookies.get('Authorization')
-    console.log(Cookies.get())
+    if (user != {}) {
+      return
+    }
+    const token = Cookies.get('Authorization')
+    const userdata = jwt(token)
+    setUser({
+      id: userdata.id,
+      username: userdata.username,
+      role: userdata.role
+    })
   }, [])
 
   var spinnerElement;
