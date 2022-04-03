@@ -1,29 +1,31 @@
-export default [
+const navData = [
     {
         name: 'Home',
-        icon: 'fas fa-home',
+        icon: ['fa-solid', 'fa-home'],
         link: '/'
     },
     {
         groupName: 'System management',
-        icon: 'fas fa-solar-system',
+        icon: ['fa-solid', 'fa-computer'],
         navLinks: [
             {
                 name: 'User Management',
-                icon: 'fas fa-users',
+                icon: ['fa-solid', 'fa-user'],
                 link: '/asdasda/asdasd'
             }
         ]
     },
     {
         groupName: 'Book Management',
-        icon: '',
+        icon: ['fa-solid', 'fa-book'],
         navLinks: [
             {
                 name: 'Book return',
-                icon: 'fas fa-arrow-turn-down-left',
+                icon: ['fa-solid', 'fa-arrow-turn-down-left'],
                 link: ''
             }
         ]
     },
 ]
+
+export default navData

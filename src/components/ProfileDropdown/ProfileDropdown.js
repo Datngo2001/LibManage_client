@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import UserContext from '../../context/UserContext';
 
 function ProfileDropdown(props) {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
         <div className="dropdown">

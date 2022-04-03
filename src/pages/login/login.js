@@ -24,7 +24,7 @@ function Login() {
             password: inputs.password
         }).then(res => {
             setLoading(false)
-            if (res.message == 'login') {
+            if (res.message === 'login') {
                 navigate('/home');
                 setUser(res.data)
             }

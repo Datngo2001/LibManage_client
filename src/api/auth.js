@@ -26,8 +26,19 @@ export async function logout() {
 }
 
 
-export async function signIn(email, password) {
+export async function register({ username, password }) {
+  const data = {
+    username: username || '',
+    password: password || ''
+  }
 
+  const url = 'login'
+  const response = await axiosClient.post(
+    url,
+    data
+  )
+
+  return response
 }
 
 export async function changePassword(email, recoveryCode) {

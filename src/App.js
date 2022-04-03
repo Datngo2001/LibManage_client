@@ -8,11 +8,16 @@ import Login from './pages/login/Login'
 import Register from './pages/register/Register'
 import Profile from './pages/profile/Profile'
 import UserContext from './context/UserContext'
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
 import Cookies from 'js-cookie';
 import jwt from 'jwt-decode';
+import { faHome, faUser, faComputer, faBook } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fab, faHome, faUser, faComputer, faBook);
 
 function App() {
 
@@ -20,7 +25,6 @@ function App() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    debugger
     if (user.username !== undefined) {
       return
     }
