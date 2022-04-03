@@ -15,9 +15,16 @@ export async function login({ username, password }) {
   return response
 }
 
-export async function getUser() {
+export async function logout() {
 
+  const url = 'logout'
+  const response = await axiosClient.post(
+    url
+  )
+
+  return response
 }
+
 
 export async function signIn(email, password) {
 
@@ -27,6 +34,3 @@ export async function changePassword(email, recoveryCode) {
 
 }
 
-export async function resetPassword(email) {
-
-}

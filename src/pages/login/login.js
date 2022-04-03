@@ -2,11 +2,13 @@ import { useContext, useState } from 'react'
 import { login } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import UserContext from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
     const { user, setUser } = useContext(UserContext);
-    const { setLoading } = useContext(LoadingContext);
+    const setLoading = useContext(LoadingContext);
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -23,9 +25,8 @@ function Login() {
         }).then(res => {
             setLoading(false)
             if (res.message == 'login') {
+                navigate('/home');
                 setUser(res.data)
-            } else {
-                alert("False")
             }
         }).catch(err => {
             setLoading(false)

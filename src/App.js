@@ -45,11 +45,12 @@ function App() {
 
   return (
     <div className="App d-block">
-      <LoadingContext.Provider value={{ setLoading }}>
+      <LoadingContext.Provider value={setLoading}>
         <UserContext.Provider value={{ user, setUser }}>
           <TopNav></TopNav>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/profile' element={<Profile />} />

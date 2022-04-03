@@ -2,11 +2,16 @@ import React, { useContext } from 'react'
 import LoginRegister from '../../components/LoginRegister/LoginRegister';
 import ProfileDropdown from '../../components/ProfileDropdown/ProfileDropdown'
 import SideNav from '../SideNav/SideNav'
-import UserContext from '../../context/UserContext';
 import { Link } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
+import { logout } from '../../api/auth'
+import LoadingContext from '../../context/LoadingContext';
+import { useNavigate } from 'react-router-dom'
 
 function TopNav() {
     const { user, setUser } = useContext(UserContext);
+    const setLoading = useContext(LoadingContext);
+    const navigate = useNavigate();
 
     var loggedin
     if (user.username) {
@@ -15,9 +20,20 @@ function TopNav() {
         loggedin = false
     }
 
+    const handleOnClick = () => {
+        setLoading(true)
+        logout().then(res => {
+            setLoading(false)
+            if (res.message === 'logout') {
+                navigate('/home');
+                setUser({})
+            }
+        })
+    }
+
     var profileElement;
     if (loggedin) {
-        profileElement = (<ProfileDropdown></ProfileDropdown>)
+        profileElement = (<ProfileDropdown handleOnClick={handleOnClick}></ProfileDropdown>)
     } else {
         profileElement = (<LoginRegister></LoginRegister>)
     }
