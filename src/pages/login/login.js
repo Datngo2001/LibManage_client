@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { login } from '../../api/auth'
+import LoadingContext from '../../context/LoadingContext';
+import UserContext from '../../context/UserContext';
 
 function Login() {
-
+    const { user, setUser } = useContext(UserContext);
+    const { setLoading } = useContext(LoadingContext);
     const [inputs, setInputs] = useState({});
 
     const handleChange = (event) => {
@@ -13,16 +16,24 @@ function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setLoading(true)
         login({
             username: inputs.username,
             password: inputs.password
         }).then(res => {
-            console.log(res)
+            setLoading(false)
+            if (res.message == 'login') {
+                setUser(res.data)
+            } else {
+                alert("False")
+            }
+        }).catch(err => {
+            setLoading(false)
         })
     }
 
     return (
-        <div className='row justify-content-center mt-3'>
+        <div className='row justify-content-center m-0 mt-3'>
             <div className="card col-3 shadow">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>

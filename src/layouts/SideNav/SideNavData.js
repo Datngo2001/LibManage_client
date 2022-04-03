@@ -21,7 +21,7 @@ export default [
         navLinks: [
             {
                 name: 'Book return',
-                icon: '',
+                icon: 'fas fa-arrow-turn-down-left',
                 link: ''
             }
         ]

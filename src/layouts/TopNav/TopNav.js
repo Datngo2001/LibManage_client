@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import LoginRegister from '../../components/LoginRegister/LoginRegister';
 import ProfileDropdown from '../../components/ProfileDropdown/ProfileDropdown'
 import SideNav from '../SideNav/SideNav'
+import UserContext from '../../context/UserContext';
+import { Link } from 'react-router-dom';
 
 function TopNav() {
-    var loggedin = false
+    const { user, setUser } = useContext(UserContext);
+
+    var loggedin
+    if (user.username) {
+        loggedin = true
+    } else {
+        loggedin = false
+    }
 
     var profileElement;
     if (loggedin) {
@@ -20,7 +29,7 @@ function TopNav() {
                     <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideNav" aria-controls="sideNav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand text-center">UTE Library</a>
+                    <Link to={'/'} className="navbar-brand text-center">UTE Library</Link>
                 </div>
                 {profileElement}
             </div>
