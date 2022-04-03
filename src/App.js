@@ -20,10 +20,14 @@ function App() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (user != {}) {
+    debugger
+    if (user.username !== undefined) {
       return
     }
     const token = Cookies.get('Authorization')
+    if (!token) {
+      return
+    }
     const userdata = jwt(token)
     setUser({
       id: userdata.id,
