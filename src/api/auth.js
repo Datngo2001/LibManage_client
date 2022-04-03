@@ -5,7 +5,6 @@ export async function login({ username, password }) {
     username: username || '',
     password: password || ''
   }
-  console.log(JSON.stringify(data))
 
   const url = 'login'
   const response = await axiosClient.post(
@@ -13,7 +12,7 @@ export async function login({ username, password }) {
     data
   )
 
-  return response.json()
+  return response
 }
 
 export async function getUser() {

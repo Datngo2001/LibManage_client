@@ -1,12 +1,12 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-console.log(process.env.BASEURL)
 const axiosClient = axios.create({
     baseURL: 'https://ute-lib-management.herokuapp.com/',
     headers: {
         'content-type': 'application/json'
     },
+    withCredentials: true,
     paramsSerializer: params => queryString.stringify(params)
 })
 
