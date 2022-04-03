@@ -1,9 +1,45 @@
-import React from 'react'
+import { useState } from 'react'
+import { login } from '../../api/auth'
 
-function login() {
+function Login() {
+
+    const [inputs, setInputs] = useState({});
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        login({
+            username: inputs.username,
+            password: inputs.password
+        }).then(res => {
+            console.log(res)
+        })
+    }
+
     return (
-        <div>login</div>
+        <div className='row justify-content-center mt-3'>
+            <div className="card col-3 shadow">
+                <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="usernameInput" className="form-label">Username</label>
+                            <input name='username' type="text" className="form-control" id="usernameInput" value={inputs.username || ""} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="passwordInput" className="form-label">Password</label>
+                            <input name='password' type="password" className="form-control" id="passwordInput" value={inputs.password || ""} onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     )
 }
 
-export default login
+export default Login

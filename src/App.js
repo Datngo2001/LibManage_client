@@ -2,7 +2,7 @@ import './App.css';
 import TopNav from './layouts/TopNav/TopNav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from './pages/home/home'
 import Login from './pages/login/login'
 import Register from './pages/register/register'

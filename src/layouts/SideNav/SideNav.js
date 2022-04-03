@@ -6,7 +6,7 @@ import NavLink from '../../components/NavLink/NavLink'
 function SideNav() {
     const groups = sideNavData
     const groupElements = groups.map((group, index) => {
-        if (group.groupName == undefined) {
+        if (group.groupName === undefined) {
             const navLink = group
             return <NavLink key={navLink.name} link={navLink.link} icon={navLink.icon} name={navLink.name}></NavLink>
         } else {
