@@ -21,7 +21,7 @@ const navData = [
         navLinks: [
             {
                 name: 'Book return',
-                icon: ['fa-solid', 'fa-arrow-turn-down-left'],
+                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
                 link: ''
             }
         ]

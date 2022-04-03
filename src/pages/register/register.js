@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { login } from '../../api/auth'
+import { register } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,15 @@ function Register() {
   const [inputs, setInputs] = useState({});
   const navigate = useNavigate();
 
+  const renderNotMatch = () => {
+    if (inputs.password !== inputs.repeatPassword) {
+      console.log('ok')
+      return (<span style={{ 'color': 'red' }}>Password not match</span>)
+    } else {
+      return (<span></span>)
+    }
+  }
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -19,14 +28,13 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true)
-    login({
+    register({
       username: inputs.username,
       password: inputs.password
     }).then(res => {
       setLoading(false)
-      if (res.message === 'login') {
-        navigate('/home');
-        setUser(res.data)
+      if (res.message === 'signup') {
+        navigate('/login');
       }
     }).catch(err => {
       setLoading(false)
@@ -46,7 +54,12 @@ function Register() {
               <label htmlFor="passwordInput" className="form-label">Password</label>
               <input name='password' type="password" className="form-control" id="passwordInput" value={inputs.password || ""} onChange={handleChange} />
             </div>
-            <button type="submit" className="btn btn-primary">Login</button>
+            <div className="mb-3">
+              <label htmlFor="repeatPasswordInput" className="form-label">Repeat Password</label>
+              <input name='repeatPassword' type="password" className="form-control" id="repeatPasswordInput" value={inputs.repeatPassword || ""} onChange={handleChange} />
+              {renderNotMatch()}
+            </div>
+            <button type="submit" className="btn btn-primary">SignIn</button>
           </form>
         </div>
       </div>

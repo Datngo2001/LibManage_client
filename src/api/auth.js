@@ -32,7 +32,7 @@ export async function register({ username, password }) {
     password: password || ''
   }
 
-  const url = 'login'
+  const url = 'signup'
   const response = await axiosClient.post(
     url,
     data
