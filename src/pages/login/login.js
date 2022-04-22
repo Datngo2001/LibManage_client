@@ -3,6 +3,7 @@ import { login } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 function Login() {
     const { user, setUser } = useContext(UserContext);
@@ -27,6 +28,8 @@ function Login() {
             if (res.message === 'login') {
                 navigate('/home');
                 setUser(res.data)
+                console.log(res.data)
+                Cookies.set('user', JSON.stringify(res.data), { path: '/', expires: '3600' })
             }
         }).catch(err => {
             setLoading(false)
