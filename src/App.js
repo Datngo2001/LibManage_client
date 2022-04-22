@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import { Route, Routes } from "react-router-dom";
 import Home from './pages/home/home'
-// import Login from './pages/login/Login'
-import Register from './pages/register/Register'
-import Profile from './pages/profile/Profile'
+import Login from './pages/login/login'
+import Register from './pages/register/register'
+import Profile from './pages/profile/profile'
 import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
@@ -51,7 +51,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
-            {/* <Route path='/login' element={<Login />} /> */}
+            <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/profile' element={<Profile />} />
           </Routes>
