@@ -11,10 +11,11 @@ import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
-import Cookies from 'js-cookie';
 import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { me } from './api/auth'
+
 
 library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft);
 
@@ -28,12 +29,11 @@ function App() {
     if (user.username !== undefined) {
       return
     }
-    const cookie = Cookies.get('user')
-    if (!cookie) {
-      return
-    }
-    const userData = JSON.parse(cookie)
-    setUser(userData)
+    me().then(res => {
+      if (res.message === 'OK') {
+        setUser(res.data)
+      }
+    })
   }, [])
 
   var spinnerElement;

@@ -45,3 +45,9 @@ export async function changePassword(email, recoveryCode) {
 
 }
 
+export async function me() {
+  const url = 'me'
+  const response = await axiosClient.get(url)
+
+  return response
+}
