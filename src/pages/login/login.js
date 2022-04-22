@@ -5,7 +5,7 @@ import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
 
-function Login() {
+export default function Login() {
     const { user, setUser } = useContext(UserContext);
     const setLoading = useContext(LoadingContext);
     const [inputs, setInputs] = useState({});
@@ -57,4 +57,3 @@ function Login() {
     )
 }
 
-export default Login
