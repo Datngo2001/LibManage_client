@@ -25,11 +25,11 @@ function App() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    console.log(user)
     if (user.username !== undefined) {
       return
     }
     me().then(res => {
+      debugger
       if (res.message === 'OK') {
         setUser(res.data)
       }

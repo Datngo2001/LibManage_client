@@ -2,11 +2,8 @@ import { React, useContext } from 'react'
 import UserContext from '../../context/UserContext';
 
 function Auth(props) {
-    const { user, setUser } = useContext(UserContext);
-
-    console.log(user)
-    console.log(props.permissions)
-
+    const { user } = useContext(UserContext);
+    debugger
     if (!user.permissionCodes) {
         return <div></div>
     }
@@ -16,7 +13,7 @@ function Auth(props) {
     };
 
     const authorizedPer = props.permissions.map(per => {
-        if (user.permissionCodes.include(per)) {
+        if (user.permissionCodes.includes(per)) {
             return per;
         }
     });
