@@ -32,6 +32,8 @@ function App() {
       debugger
       if (res.message === 'OK') {
         setUser(res.data)
+      } else {
+        setUser({})
       }
     })
   }, [])
