@@ -88,7 +88,6 @@ export async function updateUserProfile(
     {
         username,
         password,
-        groupIds,
         fname,
         lname
     }
@@ -97,7 +96,6 @@ export async function updateUserProfile(
     const data = {
         username: username,
         password: password,
-        groupIds: groupIds,
         fname: fname,
         lname: lname
     }
