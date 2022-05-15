@@ -55,6 +55,7 @@ export default function ReaderProfile() {
             }
         }).catch(err => {
             setLoading(false)
+            console.log(err)
         })
     }
 
@@ -74,7 +75,7 @@ export default function ReaderProfile() {
     }
 
     const renderNotMatch = () => {
-        if (inputs.password !== inputs.repeatPassword) {
+        if (inputs.password !== inputs.confirm) {
             console.log('ok')
             return (<span style={{ 'color': 'red' }}>Password not match</span>)
         } else {
