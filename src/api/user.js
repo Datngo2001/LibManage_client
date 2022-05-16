@@ -86,18 +86,20 @@ export async function getUserBorrowNotify() {
 
 export async function updateUserProfile(
     {
-        username,
         password,
+        newPassword,
         fname,
-        lname
+        lname,
+        email
     }
 ) {
     const url = `users/profile`
     const data = {
-        username: username,
         password: password,
+        newPassword: newPassword,
         fname: fname,
-        lname: lname
+        lname: lname,
+        email: email
     }
 
     const response = await axiosClient.put(url, data)
