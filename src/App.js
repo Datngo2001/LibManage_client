@@ -1,7 +1,9 @@
-import './App.css';
-import TopNav from './layouts/TopNav/TopNav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
+import './App.css';
+import TopNav from './layouts/TopNav/TopNav'
 import { Route, Routes } from "react-router-dom";
 import Home from './pages/home/home'
 import Login from './pages/login/login'
@@ -44,6 +46,8 @@ function App() {
   } else {
     spinnerElement = null
   }
+
+
 
   return (
     <div className="App d-block">
