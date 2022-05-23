@@ -27,7 +27,6 @@ export default function Login() {
             if (res.message === 'login') {
                 navigate('/home');
                 setUser(res.data)
-                console.log(res.data)
             }
         }).catch(err => {
             setLoading(false)
