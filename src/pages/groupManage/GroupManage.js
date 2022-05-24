@@ -38,6 +38,7 @@ function GroupManage() {
     }
 
     const handleAdd = () => {
+        setCurrentGroup(() => { })
         setFormVisible(true)
     }
 

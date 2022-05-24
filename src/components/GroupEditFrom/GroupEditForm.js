@@ -24,15 +24,26 @@ function GroupEditForm(prop) {
         permissions: [],
         users: []
     });
+    let isCreateForm = (prop.group == undefined)
 
     // Get require data
     useEffect(() => {
         debugger
-        if (prop.group.id != undefined) {
+        if (!isCreateForm) {
             getGroupById(prop.group.id).then(res => {
-                if (res.message === "OK")
+                console.log("getGroup")
+                if (res.message === "OK") {
                     setInputs(() => res.data)
+                }
             })
+        } else {
+            setInputs(() => ({
+                id: '',
+                name: '',
+                createdAt: '',
+                permissions: [],
+                users: []
+            }))
         }
         getUsers().then(res => {
             if (res.message === "findAll")
@@ -60,7 +71,7 @@ function GroupEditForm(prop) {
 
     const handleSave = () => {
         setLoading(true)
-        if (prop.group.id == undefined) {
+        if (isCreateForm) {
             createGroup({
                 name: inputs.name,
                 permissionIds: inputs.permissions.map(p => p.id),
@@ -99,7 +110,7 @@ function GroupEditForm(prop) {
                 <div className='py-2'>
                     <div className='d-flex justify-content-between mb-3'>
                         <button type="button" className="btn btn-primary" onClick={handleSave}>Save</button>
-                        <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete</button>
+                        <button type="button" className="btn btn-danger" onClick={handleDelete} disabled={isCreateForm}>Delete</button>
                     </div>
                     <form>
                         <div className="mb-3">
@@ -135,7 +146,7 @@ function GroupEditForm(prop) {
                         allowColumnResizing={true}
                         columnAutoWidth={true}
                         selectedRowKeys={inputs.users}
-                        onSelectedRowKeysChange={handleUsersChange}>
+                        onSelectionChanged={handleUsersChange}>
                         <FilterRow visible={true} />
                         <Selection mode="multiple" />
                         <Pager showPageSizeSelector={true} />

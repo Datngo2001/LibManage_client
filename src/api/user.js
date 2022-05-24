@@ -13,7 +13,8 @@ export async function createUser(
         password,
         groupIds,
         fname,
-        lname
+        lname,
+        email
     }
 ) {
     const data = {
@@ -21,7 +22,8 @@ export async function createUser(
         password: password,
         groupIds: groupIds,
         fname: fname,
-        lname: lname
+        lname: lname,
+        email: email
     }
     const url = 'users'
     const response = await axiosClient.post(
@@ -46,7 +48,8 @@ export async function updateUser(id,
         password,
         groupIds,
         fname,
-        lname
+        lname,
+        email
     }
 ) {
     const url = `users/${id}`
@@ -55,7 +58,8 @@ export async function updateUser(id,
         password: password,
         groupIds: groupIds,
         fname: fname,
-        lname: lname
+        lname: lname,
+        email: email
     }
 
     const response = await axiosClient.put(url, data)
