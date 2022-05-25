@@ -22,8 +22,12 @@ function UserManage() {
 
     // Get require data
     useEffect(() => {
+        setLoading(true)
         getUsers().then(res => {
             setData(res.data)
+            setLoading(false)
+        }).catch(err => {
+            setLoading(false)
         })
     }, [formVisible])
 
@@ -47,7 +51,6 @@ function UserManage() {
     }
 
     const handleDelete = (e) => {
-        debugger
         setLoading(true)
         deleteUser(e.data.id).then(res => {
             setLoading(false)

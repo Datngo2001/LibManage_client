@@ -1,26 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {
     DataGrid,
     Pager,
     Paging,
     Selection,
     FilterRow,
+    Button,
+    Column,
+    Editing
 } from 'devextreme-react/data-grid';
-import { getGroup } from '../../api/group';
+import { deleteGroup, getGroup } from '../../api/group';
 import GroupEditForm from '../../components/GroupEditFrom/GroupEditForm';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
+import LoadingContext from '../../context/LoadingContext';
+
 
 function GroupManage() {
+    const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
     const [formVisible, setFormVisible] = useState(false)
     const [currentGroup, setCurrentGroup] = useState({})
 
     // Get require data
     useEffect(() => {
+        setLoading(true)
         getGroup().then(res => {
             setData(res.data)
+            setLoading(false)
+        }).catch(err => {
+            setLoading(false)
         })
-    }, [])
+    }, [formVisible])
 
     const showEditForm = (group) => {
         setCurrentGroup(group)
@@ -32,8 +42,8 @@ function GroupManage() {
         setFormVisible(false)
     }
 
-    const handleSelection = (e) => {
-        let group = e.selectedRowsData[0]
+    const handleEdit = (e) => {
+        let group = e.row.data
         showEditForm(group)
     }
 
@@ -42,11 +52,38 @@ function GroupManage() {
         setFormVisible(true)
     }
 
+    const handleDelete = (e) => {
+        setLoading(true)
+        deleteGroup(e.data.id).then(res => {
+            setLoading(false)
+        }).catch(err => {
+            setLoading(false)
+            e.cancel = true
+        })
+    }
+
+    // make sure rerender form when state change
+    const renderEditForm = () => {
+        if (formVisible == false) {
+            return (<div></div>)
+        } else {
+            return (
+                <GroupEditForm
+                    onHiding={hideEditForm}
+                    group={currentGroup}>
+                </GroupEditForm>
+            )
+        }
+    }
+
     return (
         <div className='m-3'>
             <h4>Group Management</h4>
-            <DataGrid dataSource={data} showBorders={true}
-                onSelectionChanged={handleSelection} selectedRowKeys={[]}>
+            <DataGrid
+                dataSource={data}
+                showBorders={true}
+                onRowRemoving={handleDelete}
+                selectedRowKeys={[]}>
                 <FilterRow visible={true} />
                 <Selection mode="single" />
                 <Pager allowedPageSizes={200} showPageSizeSelector={true} />
@@ -56,12 +93,17 @@ function GroupManage() {
                     label="Create Group"
                     index={1}
                     onClick={handleAdd} />
+                <Editing allowDeleting={true} allowUpdating={true} />
+
+                <Column dataField="id" />
+                <Column dataField="name" />
+                <Column dataField="createdAt" />
+                <Column type="buttons">
+                    <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
+                    <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
+                </Column>
             </DataGrid>
-            <GroupEditForm
-                visible={formVisible}
-                onHiding={hideEditForm}
-                group={currentGroup}>
-            </GroupEditForm>
+            {renderEditForm()}
         </div>
     )
 }
