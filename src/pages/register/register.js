@@ -4,7 +4,7 @@ import LoadingContext from '../../context/LoadingContext';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
 
-function Register() {
+export default function Register() {
   const { user, setUser } = useContext(UserContext);
   const setLoading = useContext(LoadingContext);
   const [inputs, setInputs] = useState({});
@@ -66,5 +66,3 @@ function Register() {
     </div>
   )
 }
-
-export default Register
