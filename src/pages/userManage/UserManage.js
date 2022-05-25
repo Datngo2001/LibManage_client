@@ -77,7 +77,6 @@ function UserManage() {
 
     return (
         <div className='m-3'>
-            <h4>User Management</h4>
             <DataGrid
                 dataSource={data}
                 showBorders={true}
