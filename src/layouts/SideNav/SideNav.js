@@ -2,6 +2,7 @@ import React from 'react'
 import GroupNavLink from '../../components/GroupNavLink/GroupNavLink'
 import sideNavData from './SideNavData'
 import NavLink from '../../components/NavLink/NavLink'
+import ScrollView from 'devextreme-react/scroll-view'
 
 function SideNav() {
     const groups = sideNavData
@@ -14,14 +15,10 @@ function SideNav() {
         }
     })
     return (
-        <div className="offcanvas offcanvas-start" data-bs-scroll="false" data-bs-backdrop="true" tabIndex="-1" id="sideNav" aria-labelledby="offcanvasScrollingLabel">
-            <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Menus</h5>
-                <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div className="offcanvas-body">
+        <div className='bg-light p-2' style={{ "height": "100%" }}>
+            <ScrollView >
                 {groupElements}
-            </div>
+            </ScrollView>
         </div>
     )
 }
