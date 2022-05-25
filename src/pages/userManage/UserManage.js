@@ -5,26 +5,25 @@ import {
     Paging,
     Selection,
     FilterRow,
-    Button,
+    Editing,
     Column,
-    Editing
+    Button
 } from 'devextreme-react/data-grid';
-import { deleteGroup, getGroup } from '../../api/group';
-import GroupEditForm from '../../components/GroupEditFrom/GroupEditForm';
+import { deleteUser, getUsers } from '../../api/user';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
+import UserEditForm from '../../components/UserEditForm/UserEditForm';
 import LoadingContext from '../../context/LoadingContext';
 
-
-function GroupManage() {
+function UserManage() {
     const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
     const [formVisible, setFormVisible] = useState(false)
-    const [currentGroup, setCurrentGroup] = useState({})
+    const [currentUser, setCurrentUser] = useState(undefined)
 
     // Get require data
     useEffect(() => {
         setLoading(true)
-        getGroup().then(res => {
+        getUsers().then(res => {
             setData(res.data)
             setLoading(false)
         }).catch(err => {
@@ -32,29 +31,28 @@ function GroupManage() {
         })
     }, [formVisible])
 
-    const showEditForm = (group) => {
-        setCurrentGroup(group)
-        setFormVisible(true)
+    const showEditForm = (user) => {
+        setCurrentUser(() => user)
+        setFormVisible(() => true)
     }
 
     const hideEditForm = () => {
-        setCurrentGroup({})
+        setCurrentUser({})
         setFormVisible(false)
     }
 
     const handleEdit = (e) => {
-        let group = e.row.data
-        showEditForm(group)
+        let user = e.row.data
+        showEditForm(user)
     }
 
-    const handleAdd = () => {
-        setCurrentGroup(() => { })
-        setFormVisible(true)
+    const handleAdd = (e) => {
+        showEditForm(undefined)
     }
 
     const handleDelete = (e) => {
         setLoading(true)
-        deleteGroup(e.data.id).then(res => {
+        deleteUser(e.data.id).then(res => {
             setLoading(false)
         }).catch(err => {
             setLoading(false)
@@ -62,41 +60,46 @@ function GroupManage() {
         })
     }
 
+
     // make sure rerender form when state change
     const renderEditForm = () => {
         if (formVisible == false) {
             return (<div></div>)
         } else {
             return (
-                <GroupEditForm
+                <UserEditForm
                     onHiding={hideEditForm}
-                    group={currentGroup}>
-                </GroupEditForm>
+                    user={currentUser}>
+                </UserEditForm>
             )
         }
     }
 
     return (
         <div className='m-3'>
-            <h4>Group Management</h4>
+            <h4>User Management</h4>
             <DataGrid
                 dataSource={data}
                 showBorders={true}
+                selectedRowKeys={[]}
                 onRowRemoving={handleDelete}
-                selectedRowKeys={[]}>
+            >
                 <FilterRow visible={true} />
                 <Selection mode="single" />
                 <Pager allowedPageSizes={200} showPageSizeSelector={true} />
                 <Paging defaultPageSize={100} />
+                <Editing mode={"row"} allowDeleting={true} allowUpdating={true} />
                 <SpeedDialAction
                     icon="add"
-                    label="Create Group"
+                    label="Create User"
                     index={1}
                     onClick={handleAdd} />
-                <Editing allowDeleting={true} allowUpdating={true} />
 
                 <Column dataField="id" />
-                <Column dataField="name" />
+                <Column dataField="username" />
+                <Column dataField="email" />
+                <Column dataField="fname" />
+                <Column dataField="lname" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
@@ -108,4 +111,4 @@ function GroupManage() {
     )
 }
 
-export default GroupManage
+export default UserManage

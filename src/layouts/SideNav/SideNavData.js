@@ -11,7 +11,7 @@ const navData = [
             {
                 name: 'User Management',
                 icon: ['fa-solid', 'fa-user'],
-                link: '/asdasda/asdasd'
+                link: '/usermanage'
             },
             {
                 name: 'Group Management',

@@ -8,6 +8,7 @@ import {
     Paging,
     Selection,
     FilterRow,
+    Column
 } from 'devextreme-react/data-grid';
 import { Popup } from 'devextreme-react/popup';
 import ScrollView from 'devextreme-react/scroll-view';
@@ -24,15 +25,25 @@ function GroupEditForm(prop) {
         permissions: [],
         users: []
     });
+    let isCreateForm = (prop.group == undefined)
 
     // Get require data
     useEffect(() => {
-        debugger
-        if (prop.group.id != undefined) {
+        if (!isCreateForm) {
             getGroupById(prop.group.id).then(res => {
-                if (res.message === "OK")
+                console.log("getGroup")
+                if (res.message === "OK") {
                     setInputs(() => res.data)
+                }
             })
+        } else {
+            setInputs(() => ({
+                id: '',
+                name: '',
+                createdAt: '',
+                permissions: [],
+                users: []
+            }))
         }
         getUsers().then(res => {
             if (res.message === "findAll")
@@ -42,7 +53,7 @@ function GroupEditForm(prop) {
             if (res.message === "OK")
                 setPermissions(() => res.data)
         })
-    }, [prop.group])
+    }, [])
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -60,7 +71,7 @@ function GroupEditForm(prop) {
 
     const handleSave = () => {
         setLoading(true)
-        if (prop.group.id == undefined) {
+        if (isCreateForm) {
             createGroup({
                 name: inputs.name,
                 permissionIds: inputs.permissions.map(p => p.id),
@@ -83,24 +94,10 @@ function GroupEditForm(prop) {
         }
     }
 
-    const handleDelete = () => {
-        setLoading(true)
-        deleteGroup(inputs.id).then(res => {
-            prop.onHiding()
-            setLoading(false)
-        }).catch(err => {
-            setLoading(false)
-        })
-    }
-
     return (
-        <Popup visible={prop.visible} onHiding={prop.onHiding}>
+        <Popup visible={true} onHiding={prop.onHiding}>
             <ScrollView width='100%' height='100%'>
-                <div className='py-2'>
-                    <div className='d-flex justify-content-between mb-3'>
-                        <button type="button" className="btn btn-primary" onClick={handleSave}>Save</button>
-                        <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete</button>
-                    </div>
+                <div className='p-2'>
                     <form>
                         <div className="mb-3">
                             <label htmlFor="id" className="form-label">Id</label>
@@ -135,12 +132,23 @@ function GroupEditForm(prop) {
                         allowColumnResizing={true}
                         columnAutoWidth={true}
                         selectedRowKeys={inputs.users}
-                        onSelectedRowKeysChange={handleUsersChange}>
+                        onSelectionChanged={handleUsersChange}>
                         <FilterRow visible={true} />
                         <Selection mode="multiple" />
                         <Pager showPageSizeSelector={true} />
                         <Paging defaultPageSize={8} />
+
+                        <Column dataField="id" />
+                        <Column dataField="username" />
+                        <Column dataField="email" />
+                        <Column dataField="fname" />
+                        <Column dataField="lname" />
+                        <Column dataField="createdAt" />
                     </DataGrid>
+                    <div className='d-flex justify-content-around mt-3'>
+                        <button type="button" className="btn btn-danger w-25" onClick={prop.onHiding}>Cancel</button>
+                        <button type="button" className="btn btn-success w-25" onClick={handleSave}>Save</button>
+                    </div>
                 </div>
             </ScrollView>
         </Popup>

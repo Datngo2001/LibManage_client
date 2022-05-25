@@ -18,6 +18,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { me } from './api/auth'
 import GroupManage from './pages/groupManage/GroupManage';
+import UserManage from './pages/userManage/UserManage';
 
 
 library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft);
@@ -62,6 +63,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/profile' element={<ReaderProfile />} />
             <Route path='/groupmanage' element={<GroupManage />} />
+            <Route path='/usermanage' element={<UserManage />} />
           </Routes>
         </UserContext.Provider>
       </LoadingContext.Provider>
