@@ -6,6 +6,7 @@ import Home from '../pages/home/home'
 import Login from '../pages/login/login'
 import Register from '../pages/register/register'
 import ReaderProfile from '../pages/readerProfile/readerProfile'
+import BrowsingBooks from '../pages/BrowsingBooks/BrowsingBooks';
 
 function AppRoutes(prop) {
     // Const
@@ -21,6 +22,10 @@ function AppRoutes(prop) {
         {
             pers: [1, 2, 3, 4],
             route: (<Route key={3} path='/usermanage' element={<UserManage />} />)
+        },
+        {
+            pers: [],
+            route: (<Route key={3} path='/books' element={<BrowsingBooks />} />)
         },
     ]
 
