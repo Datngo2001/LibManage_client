@@ -7,7 +7,8 @@ import {
     FilterRow,
     Editing,
     Column,
-    Button
+    Button,
+    SearchPanel
 } from 'devextreme-react/data-grid';
 import { deleteUser, getUsers } from '../../api/user';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
@@ -77,13 +78,15 @@ function UserManage() {
 
     return (
         <div className='m-3'>
-            <h4>User Management</h4>
             <DataGrid
                 dataSource={data}
                 showBorders={true}
                 selectedRowKeys={[]}
                 onRowRemoving={handleDelete}
             >
+                <SearchPanel visible={true}
+                    width={"auto"}
+                    placeholder="Search..." />
                 <FilterRow visible={true} />
                 <Selection mode="single" />
                 <Pager allowedPageSizes={200} showPageSizeSelector={true} />

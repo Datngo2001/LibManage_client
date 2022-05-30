@@ -5,6 +5,11 @@ const navData = [
         link: '/'
     },
     {
+        name: 'Books Browsing',
+        icon: ['fa-solid', 'fa-book'],
+        link: '/books'
+    },
+    {
         groupName: 'System management',
         icon: ['fa-solid', 'fa-computer'],
         navLinks: [

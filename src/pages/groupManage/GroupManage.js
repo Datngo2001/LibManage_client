@@ -78,7 +78,6 @@ function GroupManage() {
 
     return (
         <div className='m-3'>
-            <h4>Group Management</h4>
             <DataGrid
                 dataSource={data}
                 showBorders={true}

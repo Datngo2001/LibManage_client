@@ -8,7 +8,7 @@ import { logout } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import { useNavigate } from 'react-router-dom'
 
-function TopNav() {
+function TopNav(prop) {
     const { user, setUser } = useContext(UserContext);
     const setLoading = useContext(LoadingContext);
     const navigate = useNavigate();
@@ -42,14 +42,13 @@ function TopNav() {
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
                 <div className='d-flex justify-content-between' style={{ width: '15%' }}>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideNav" aria-controls="sideNav">
+                    <button className="navbar-toggler" type="button" onClick={prop.tongleSideBar}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <Link to={'/'} className="navbar-brand text-center">UTE Library</Link>
                 </div>
                 {profileElement}
             </div>
-            <SideNav></SideNav>
         </nav>
     )
 }
