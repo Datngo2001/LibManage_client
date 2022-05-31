@@ -12,21 +12,21 @@ import {
 } from 'devextreme-react/data-grid';
 import { deleteUser, getUsers } from '../../api/user';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
-import UserEditForm from '../../components/UserEditForm/UserEditForm';
 import LoadingContext from '../../context/LoadingContext';
-import { deleteBookTitle, getBookTitle } from '../../api/bookTitle';
-import BookTitleEditForm from '../../components/BookTitleEditForm/BookTitleEditForm';
+import { deleteCategory, getCategory } from '../../api/category';
+import CategoryManagementEditForm from './categoryManagement'
+import CatagoryManagementEditForm from '../../components/CategoryManagementEditForm/CategoryManagementEditForm';
 
-function BookManagement() {
+function CategoryManagement() {
     const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
     const [formVisible, setFormVisible] = useState(false)
-    const [currentBookTitle, setCurrentBookTitle] = useState(undefined)
+    const [currentCategory, setCurrentCategory] = useState(undefined)
 
     // Get require data
     useEffect(() => {
         setLoading(true)
-        getBookTitle().then(res => {
+        getCategory().then(res => {
             setData(res.data)
             setLoading(false)
         }).catch(err => {
@@ -34,19 +34,19 @@ function BookManagement() {
         })
     }, [formVisible])
 
-    const showEditForm = (booktitle) => {
-        setCurrentBookTitle(() => booktitle)
+    const showEditForm = (category) => {
+        setCurrentCategory(() => category)
         setFormVisible(() => true)
     }
 
     const hideEditForm = () => {
-        setCurrentBookTitle({})
+        setCurrentCategory({})
         setFormVisible(false)
     }
 
     const handleEdit = (e) => {
-        let booktitle = e.row.data
-        showEditForm(booktitle)
+        let category = e.row.data
+        showEditForm(category)
     }
 
     const handleAdd = (e) => {
@@ -55,7 +55,7 @@ function BookManagement() {
 
     const handleDelete = (e) => {
         setLoading(true)
-        deleteBookTitle(e.data.id).then(res => {
+        deleteCategory(e.data.id).then(res => {
             setLoading(false)
         }).catch(err => {
             setLoading(false)
@@ -70,10 +70,10 @@ function BookManagement() {
             return (<div></div>)
         } else {
             return (
-                <BookTitleEditForm
+                <CatagoryManagementEditForm
                     onHiding={hideEditForm}
-                    booktitle={currentBookTitle}>
-                </BookTitleEditForm>
+                    booktitle={currentCategory}>
+                </CatagoryManagementEditForm>
             )
         }
     }
@@ -96,18 +96,14 @@ function BookManagement() {
                 <Editing mode={"row"} allowDeleting={true} allowUpdating={true} />
                 <SpeedDialAction
                     icon="add"
-                    label="Create Book Title"
+                    label="Create Category"
                     index={1}
                     onClick={handleAdd} />
 
                 <Column dataField="id" />
-                <Column dataField="title" />
-                <Column dataField="author" />
-                <Column dataField="image" />
-                <Column dataField="description" />
+                <Column dataField="name" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
-                    
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
                 </Column>
@@ -117,4 +113,4 @@ function BookManagement() {
     )
 }
 
-export default BookManagement
+export default CategoryManagement

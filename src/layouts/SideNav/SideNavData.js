@@ -30,9 +30,14 @@ const navData = [
         icon: ['fa-solid', 'fa-book'],
         navLinks: [
             {
-                name: 'Book return',
+                name: 'Books Manage',
                 icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
-                link: ''
+                link: '/booksmanage'
+            },
+            {
+                name: 'Category Manage',
+                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
+                link: '/categorymanage'
             }
         ]
     },
