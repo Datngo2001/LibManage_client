@@ -11,10 +11,12 @@ import ScrollView from 'devextreme-react/scroll-view';
 import LoadingContext from '../../context/LoadingContext';
 import { createBookTitle, getBookTitleById, updateBookTitle } from '../../api/bookTitle';
 import { getCategory } from '../../api/category';
+import { getBook } from '../../api/book';
 
 function BookTitleEditForm(prop) {
     const setLoading = useContext(LoadingContext);
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState([]);
+    const [book, setBook] = useState([]);
     const [inputs, setInputs] = useState({});
     let isCreateForm = (prop.booktitle == undefined)
 
@@ -42,16 +44,26 @@ function BookTitleEditForm(prop) {
                 categorys:[]
             }))
         }
+
+        getBook().then(res => {
+            if (res.message === "OK")
+                setBook(() => res.data)
+        })
         getCategory().then(res => {
             if (res.message === "OK")
                 setCategory(() => res.data)
-        })
+        })    
     }, [])
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
+    }
+
+    const handleBookChange = (e) => {
+        debugger
+        setInputs(values => ({ ...values, ["books"]: e.selectedRowData}))
     }
 
     const handleCategoryChange = (e) => {
@@ -126,6 +138,20 @@ function BookTitleEditForm(prop) {
                             <input name='createdAt' type="text" className="form-control" id="createdAt" value={inputs.createdAt} readOnly />
                         </div>
                     </form>
+                    <hr></hr>
+                    <h4>Books</h4>
+                    <DataGrid>
+                        dataSource={book}
+                        showBorders={true}
+                        allowColumnResizing={true}
+                        columnAutoWidth={true}
+                        selectedRowKeys={inputs.books}
+                        onSelectionChanged={handleBookChange}
+                        <FilterRow visible={true} />
+                        <Selection mode="multiple" />
+                        <Pager showPageSizeSelector={true} />
+                        <Paging defaultPageSize={8} />
+                    </DataGrid>
                     <hr></hr>
                     <h4>Category</h4>
                     <DataGrid
