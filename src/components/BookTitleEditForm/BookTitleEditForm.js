@@ -18,7 +18,7 @@ function BookTitleEditForm(prop) {
     const [category, setCategory] = useState([]);
     const [book, setBook] = useState([]);
     const [inputs, setInputs] = useState({});
-    let isCreateForm = (prop.booktitle == undefined)
+    let isCreateForm = (prop.booktitle ==  undefined)
 
     // Get require data
     useEffect(() => {
@@ -140,17 +140,17 @@ function BookTitleEditForm(prop) {
                     </form>
                     <hr></hr>
                     <h4>Books</h4>
-                    <DataGrid>
+                    <DataGrid
                         dataSource={book}
                         showBorders={true}
                         allowColumnResizing={true}
                         columnAutoWidth={true}
                         selectedRowKeys={inputs.books}
-                        onSelectionChanged={handleBookChange}
+                        onSelectionChanged={handleBookChange}>
                         <FilterRow visible={true} />
                         <Selection mode="multiple" />
                         <Pager showPageSizeSelector={true} />
-                        <Paging defaultPageSize={8} />
+                        <Paging defaultPageSize={8} /> 
                     </DataGrid>
                     <hr></hr>
                     <h4>Category</h4>
