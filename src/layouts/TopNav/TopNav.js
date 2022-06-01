@@ -27,7 +27,7 @@ function TopNav(prop) {
                 navigate('/home');
                 setUser({})
             }
-        })
+        }).catch(err => console.log(err))
     }
 
     var profileElement;

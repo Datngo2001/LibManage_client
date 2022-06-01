@@ -19,7 +19,6 @@ function SideNav(prop) {
     })
 
     function isAllowed(pers) {
-        debugger
         if (pers.length == 0) {
             return true
         }

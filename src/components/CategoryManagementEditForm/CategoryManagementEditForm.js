@@ -42,7 +42,7 @@ function CatagoryManagementEditForm(prop) {
         getBookTitle().then(res => {
             if (res.message === "OK")
                 setBookTitles(() => res.data)
-        })
+        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {

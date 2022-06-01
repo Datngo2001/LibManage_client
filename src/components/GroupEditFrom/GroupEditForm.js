@@ -35,7 +35,7 @@ function GroupEditForm(prop) {
                 if (res.message === "OK") {
                     setInputs(() => res.data)
                 }
-            })
+            }).catch(err => console.log(err))
         } else {
             setInputs(() => ({
                 id: '',
@@ -48,11 +48,11 @@ function GroupEditForm(prop) {
         getUsers().then(res => {
             if (res.message === "findAll")
                 setUsers(() => res.data)
-        })
+        }).catch(err => console.log(err))
         getPermissions().then(res => {
             if (res.message === "OK")
                 setPermissions(() => res.data)
-        })
+        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {
@@ -80,7 +80,7 @@ function GroupEditForm(prop) {
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
-            })
+            }).catch(err => console.log(err))
         } else {
             updateGroup(inputs.id, {
                 name: inputs.name,
@@ -90,7 +90,7 @@ function GroupEditForm(prop) {
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
-            })
+            }).catch(err => console.log(err))
         }
     }
 
@@ -143,7 +143,7 @@ function GroupEditForm(prop) {
                         <Column dataField="email" />
                         <Column dataField="fname" />
                         <Column dataField="lname" />
-                        <Column dataField="createdAt" />
+                        <Column dataField="createdAt" dataType="datetime" />
                     </DataGrid>
                     <div className='d-flex justify-content-around mt-3'>
                         <button type="button" className="btn btn-danger w-25" onClick={prop.onHiding}>Cancel</button>

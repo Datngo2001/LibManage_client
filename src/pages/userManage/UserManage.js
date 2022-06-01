@@ -103,7 +103,7 @@ function UserManage() {
                 <Column dataField="email" />
                 <Column dataField="fname" />
                 <Column dataField="lname" />
-                <Column dataField="createdAt" />
+                <Column dataField="createdAt" dataType="datetime" />
                 <Column type="buttons">
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>

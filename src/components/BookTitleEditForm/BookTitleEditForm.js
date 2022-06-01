@@ -29,7 +29,7 @@ function BookTitleEditForm(prop) {
                     setInputs(() => res.data)
                     setLoading(false)
                 }
-            })
+            }).catch(err => console.log(err))
         } else {
             setInputs(() => ({
                 id: '',
@@ -45,7 +45,7 @@ function BookTitleEditForm(prop) {
         getCategory().then(res => {
             if (res.message === "OK")
                 setCategory(() => res.data)
-        })
+        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {
@@ -70,7 +70,6 @@ function BookTitleEditForm(prop) {
                 categoryIds: inputs.categorys.map(g => g.id),
                 bookIds: []
             }).then(res => {
-
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)

@@ -8,12 +8,15 @@ import {
     Editing,
     Column,
     Button,
-    SearchPanel
+    SearchPanel,
+    MasterDetail
 } from 'devextreme-react/data-grid';
-import { deleteUser, getUsers } from '../../api/user';
+import { deleteUser, getBorrowers, getUsers } from '../../api/user';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
 import UserEditForm from '../../components/UserEditForm/UserEditForm';
 import LoadingContext from '../../context/LoadingContext';
+import ReaderAddForm from '../../components/ReaderAddForm/ReaderAddForm';
+import ReaderDetail from '../../components/ReaderDetail/ReaderDetail';
 
 function BorrowerManage() {
     const setLoading = useContext(LoadingContext);
@@ -24,7 +27,11 @@ function BorrowerManage() {
     // Get require data
     useEffect(() => {
         setLoading(true)
-        getUsers().then(res => {
+        getBorrowers().then(res => {
+            res.data.forEach(user => {
+                user.borrowBills = user._count.borrowBills
+                user.borrowRegister = user._count.borrowRegister
+            });
             setData(res.data)
             setLoading(false)
         }).catch(err => {
@@ -32,46 +39,26 @@ function BorrowerManage() {
         })
     }, [formVisible])
 
-    const showEditForm = (user) => {
-        setCurrentUser(() => user)
+    const showReaderForm = () => {
         setFormVisible(() => true)
     }
 
-    const hideEditForm = () => {
-        setCurrentUser({})
+    const hideReaderForm = () => {
         setFormVisible(false)
     }
 
-    const handleEdit = (e) => {
-        let user = e.row.data
-        showEditForm(user)
-    }
-
     const handleAdd = (e) => {
-        showEditForm(undefined)
+        showReaderForm()
     }
 
-    const handleDelete = (e) => {
-        setLoading(true)
-        deleteUser(e.data.id).then(res => {
-            setLoading(false)
-        }).catch(err => {
-            setLoading(false)
-            e.cancel = true
-        })
-    }
-
-
-    // make sure rerender form when state change
-    const renderEditForm = () => {
+    const renderReaderForm = () => {
         if (formVisible == false) {
             return (<div></div>)
         } else {
             return (
-                <UserEditForm
-                    onHiding={hideEditForm}
-                    user={currentUser}>
-                </UserEditForm>
+                <ReaderAddForm
+                    onHiding={hideReaderForm}>
+                </ReaderAddForm>
             )
         }
     }
@@ -81,8 +68,8 @@ function BorrowerManage() {
             <DataGrid
                 dataSource={data}
                 showBorders={true}
-                selectedRowKeys={[]}
-                onRowRemoving={handleDelete}
+                allowColumnResizing={true}
+                allowColumnReordering={true}
             >
                 <SearchPanel visible={true}
                     width={"auto"}
@@ -91,25 +78,29 @@ function BorrowerManage() {
                 <Selection mode="single" />
                 <Pager allowedPageSizes={200} showPageSizeSelector={true} />
                 <Paging defaultPageSize={100} />
-                <Editing mode={"row"} allowDeleting={true} allowUpdating={true} />
+                <Editing mode={"row"} allowDeleting={false} allowUpdating={false} />
                 <SpeedDialAction
                     icon="add"
-                    label="Create User"
+                    label="Create New Reader"
                     index={1}
                     onClick={handleAdd} />
 
                 <Column dataField="id" />
                 <Column dataField="username" />
                 <Column dataField="email" />
+                <Column dataField="borrowRegister" />
+                <Column dataField="borrowBills" />
                 <Column dataField="fname" />
                 <Column dataField="lname" />
-                <Column dataField="createdAt" />
-                <Column type="buttons">
-                    <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
-                    <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
-                </Column>
+                <Column dataField="createdAt" dataType="datetime" />
+
+                <MasterDetail
+                    enabled={true}
+                    component={ReaderDetail}
+                >
+                </MasterDetail>
             </DataGrid>
-            {renderEditForm()}
+            {renderReaderForm()}
         </div>
     )
 }
