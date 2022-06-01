@@ -3,7 +3,6 @@ import UserContext from '../../context/UserContext';
 
 function Auth(props) {
     const { user } = useContext(UserContext);
-    debugger
     if (!user.permissionCodes) {
         return <div></div>
     }

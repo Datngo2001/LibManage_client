@@ -74,9 +74,13 @@ function App() {
 
   function renderSideBar() {
     if (sideBarVisible && user.username !== undefined) {
+      let userPermissions = []
+      if (user.permissionCodes != undefined) {
+        userPermissions = user.permissionCodes
+      }
       return (
         <div style={{ "width": defauntSideBarWidth }}>
-          <SideNav></SideNav>
+          <SideNav userPermissions={userPermissions}></SideNav>
         </div>
       )
     } else {

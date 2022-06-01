@@ -7,7 +7,8 @@ import {
     FilterRow,
     Button,
     Column,
-    Editing
+    Editing,
+    SearchPanel
 } from 'devextreme-react/data-grid';
 import { deleteGroup, getGroup } from '../../api/group';
 import GroupEditForm from '../../components/GroupEditFrom/GroupEditForm';
@@ -93,6 +94,9 @@ function GroupManage() {
                     index={1}
                     onClick={handleAdd} />
                 <Editing allowDeleting={true} allowUpdating={true} />
+                <SearchPanel visible={true}
+                    width={"auto"}
+                    placeholder="Search..." />
 
                 <Column dataField="id" />
                 <Column dataField="name" />

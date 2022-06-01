@@ -30,12 +30,12 @@ function AppRoutes(prop) {
             route: (<Route key={4} path='/books' element={<BrowsingBooks />} />)
         },
         {
-            pers: [5, 6, 7, 8,9,10,11],
+            pers: [5, 6, 7, 8, 9, 10, 11],
             route: (<Route key={5} path='/booksmanage' element={<BookManagement />} />)
         },
         {
-            pers: [5, 6, 7, 8,9,10,11],
-            route: (<Route key={5} path='/categorymanage' element={<CategoryManagement />} />)
+            pers: [5, 6, 7, 8, 9, 10, 11],
+            route: (<Route key={6} path='/categorymanage' element={<CategoryManagement />} />)
         },
     ]
 

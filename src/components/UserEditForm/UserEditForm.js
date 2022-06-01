@@ -55,7 +55,7 @@ function UserEditForm(prop) {
     }
 
     const handleGroupsChange = (e) => {
-        debugger
+
         setInputs(values => ({ ...values, ["groups"]: e.selectedRowsData }))
     }
 
@@ -70,13 +70,13 @@ function UserEditForm(prop) {
                 password: inputs.password,
                 groupIds: inputs.groups.map(g => g.id),
             }).then(res => {
-                debugger
+
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
             })
         } else {
-            debugger
+
             updateUser(inputs.id, {
                 username: inputs.username,
                 fname: inputs.fname,
