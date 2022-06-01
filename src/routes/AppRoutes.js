@@ -9,6 +9,9 @@ import ReaderProfile from '../pages/readerProfile/readerProfile'
 import BrowsingBooks from '../pages/BrowsingBooks/BrowsingBooks';
 import BookManagement from '../pages/bookManagement/bookManagement';
 import CategoryManagement from '../pages/categoryManagement/categoryManagement';
+import BorrowerManage from '../pages/borrowerManage/BorrowerManage';
+import BorrowBill from '../pages/borrowBill/BorrowBill';
+import BorrowRegister from '../pages/borrowRegiser/BorrowRegister';
 
 function AppRoutes(prop) {
     // Const
@@ -31,11 +34,23 @@ function AppRoutes(prop) {
         },
         {
             pers: [5, 6, 7, 8, 9, 10, 11],
-            route: (<Route key={5} path='/booksmanage' element={<BookManagement />} />)
+            route: (<Route key={5} path='/booktitlemanage' element={<BookManagement />} />)
         },
         {
             pers: [5, 6, 7, 8, 9, 10, 11],
             route: (<Route key={6} path='/categorymanage' element={<CategoryManagement />} />)
+        },
+        {
+            pers: [5, 6, 7, 8, 9, 10, 11],
+            route: (<Route key={7} path='/borrowermanage' element={<BorrowerManage />} />)
+        },
+        {
+            pers: [],
+            route: (<Route key={8} path='/borrowbill' element={<BorrowBill />} />)
+        },
+        {
+            pers: [],
+            route: (<Route key={9} path='/borrowregister' element={<BorrowRegister />} />)
         },
     ]
 

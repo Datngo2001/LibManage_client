@@ -7,6 +7,13 @@ export async function getUsers() {
     return response
 }
 
+export async function getBorrowers() {
+    const url = 'users/borrower'
+    const response = await axiosClient.get(url)
+
+    return response
+}
+
 export async function createUser(
     {
         username,
@@ -34,9 +41,40 @@ export async function createUser(
     return response
 }
 
+export async function createBorrower(
+    {
+        username,
+        password,
+        fname,
+        lname,
+        email
+    }
+) {
+    const data = {
+        username: username,
+        password: password,
+        fname: fname,
+        lname: lname,
+        email: email
+    }
+    const url = 'users/reader'
+    const response = await axiosClient.post(
+        url,
+        data
+    )
+
+    return response
+}
 
 export async function getUserById(id) {
     const url = `users/${id}`
+    const response = await axiosClient.get(url)
+
+    return response
+}
+
+export async function getBorrowerById(id) {
+    const url = `users/borrower/${id}`
     const response = await axiosClient.get(url)
 
     return response

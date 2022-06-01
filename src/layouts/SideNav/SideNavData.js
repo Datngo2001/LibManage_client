@@ -12,6 +12,18 @@ const navData = [
         link: '/books'
     },
     {
+        pers: [],
+        name: 'Borrow Registers',
+        icon: ['fa-solid', 'fa-book'],
+        link: '/borrowregister'
+    },
+    {
+        pers: [],
+        name: 'Borrow Bill',
+        icon: ['fa-solid', 'fa-book'],
+        link: '/borrowbill          '
+    },
+    {
         pers: [1, 2, 3, 4],
         groupName: 'System management',
         icon: ['fa-solid', 'fa-computer'],
@@ -39,7 +51,7 @@ const navData = [
                 pers: [5, 6, 7, 8, 9, 10, 11],
                 name: 'Books Manage',
                 icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
-                link: '/booksmanage'
+                link: '/booktitlemanage'
             },
             {
                 pers: [5, 6, 7, 8, 9, 10, 11],
@@ -49,6 +61,20 @@ const navData = [
             }
         ]
     },
+    {
+        pers: [5, 12, 13, 14, 15, 16],
+        groupName: 'Borrower Management',
+        icon: ['fa-solid', 'fa-book'],
+        navLinks: [
+            {
+                pers: [5, 12, 13, 14, 15, 16],
+                name: 'Borrower Manage',
+                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
+                link: '/borrowermanage'
+            },
+        ]
+    },
+
 ]
 
 export default navData
