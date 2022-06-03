@@ -45,6 +45,7 @@ function ReaderDetail(prop) {
             bill.bookNames = ""
             bill.books.forEach(book => {
                 bill.bookNames += (book.BookTitle.title + ", ")
+                bill.createDate = bill.borrowDate
             })
             borrowInfos.push(bill)
         })
@@ -92,7 +93,7 @@ function ReaderDetail(prop) {
         }
         if (data.isReturned === false) {
             let remain = dateDiff(new Date(data.planReturnDate), new Date());
-            if (remain > 0) {
+            if (remain < 0) {
                 return <button onClick={handleReturn(data)} className='btn btn-warning btn-sm w-50'>Return</button>
             } else {
                 return <button onClick={handleReturn(data)} className='btn btn-primary btn-sm w-50'>Return</button >
