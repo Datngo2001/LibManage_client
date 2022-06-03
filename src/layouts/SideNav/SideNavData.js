@@ -13,15 +13,9 @@ const navData = [
     },
     {
         pers: [],
-        name: 'Borrow Registers',
+        name: 'Reader Card',
         icon: ['fa-solid', 'fa-book'],
-        link: '/borrowregister'
-    },
-    {
-        pers: [],
-        name: 'Borrow Bill',
-        icon: ['fa-solid', 'fa-book'],
-        link: '/borrowbill          '
+        link: '/readercard'
     },
     {
         pers: [1, 2, 3, 4],
