@@ -1,6 +1,6 @@
-import React from 'react'
-import GroupManage from '../pages/groupManage/GroupManage';
-import UserManage from '../pages/userManage/UserManage';
+import React from "react";
+import GroupManage from "../pages/groupManage/GroupManage";
+import UserManage from "../pages/userManage/UserManage";
 import { Route, Routes } from "react-router-dom";
 import Home from '../pages/home/home'
 import Login from '../pages/login/login'
@@ -49,35 +49,33 @@ function AppRoutes(prop) {
         },
     ]
 
-    //Fuction
-    function renderRestrictedRoutes() {
-        if (!prop.permissions) {
-            return (<></>)
-        }
-
-        let allowedRoutes = []
-        routeAndPermission.forEach(r => {
-            if (r.pers.some(p => prop.permissions.includes(p))) {
-                allowedRoutes.push(r.route)
-            } else if (r.pers.length == 0) {
-                allowedRoutes.push(r.route)
-            }
-        });
-
-        return (<>
-            {allowedRoutes}
-        </>)
+  //Fuction
+  function renderRestrictedRoutes() {
+    if (!prop.permissions) {
+      return <></>;
     }
 
-    return (
-        <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            {renderRestrictedRoutes()}
-        </Routes>
-    )
+    let allowedRoutes = [];
+    routeAndPermission.forEach((r) => {
+      if (r.pers.some((p) => prop.permissions.includes(p))) {
+        allowedRoutes.push(r.route);
+      } else if (r.pers.length == 0) {
+        allowedRoutes.push(r.route);
+      }
+    });
+
+    return <>{allowedRoutes}</>;
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      {renderRestrictedRoutes()}
+    </Routes>
+  );
 }
 
-export default AppRoutes
+export default AppRoutes;
