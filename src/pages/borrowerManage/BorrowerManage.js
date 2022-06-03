@@ -22,7 +22,6 @@ function BorrowerManage() {
     const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
     const [formVisible, setFormVisible] = useState(false)
-    const [currentUser, setCurrentUser] = useState(undefined)
 
     // Get require data
     useEffect(() => {
@@ -76,8 +75,8 @@ function BorrowerManage() {
                     placeholder="Search..." />
                 <FilterRow visible={true} />
                 <Selection mode="single" />
-                <Pager allowedPageSizes={200} showPageSizeSelector={true} />
-                <Paging defaultPageSize={100} />
+                <Pager allowedPageSizes={20} showPageSizeSelector={true} />
+                <Paging defaultPageSize={10} />
                 <Editing mode={"row"} allowDeleting={false} allowUpdating={false} />
                 <SpeedDialAction
                     icon="add"

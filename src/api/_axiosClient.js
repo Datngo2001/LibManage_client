@@ -13,9 +13,10 @@ const axiosClient = axios.create({
 })
 
 let needToToast = [
-    "created",
-    "updated",
-    "deleted"
+    "put",
+    "post",
+    "patch",
+    "delete"
 ]
 
 const AxiosInterceptor = ({ children }) => {
@@ -25,8 +26,9 @@ const AxiosInterceptor = ({ children }) => {
     useEffect(() => {
 
         const resInterceptor = res => {
+            debugger
             if (res && res.data) {
-                if (needToToast.some(n => n == res.data.message)) {
+                if (needToToast.some(n => n == res.config.method)) {
                     setToastConfig({
                         ...toastConfig,
                         isVisible: true,

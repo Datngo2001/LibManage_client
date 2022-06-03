@@ -8,7 +8,7 @@ import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
-import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning, faX } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { me } from './api/auth'
@@ -18,7 +18,7 @@ import { AxiosInterceptor } from './api/_axiosClient'
 import SideNav from './layouts/SideNav/SideNav';
 import AppRoutes from './routes/AppRoutes';
 
-library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning);
+library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faX);
 
 function App() {
   // Const
@@ -101,7 +101,7 @@ function App() {
         <UserContext.Provider value={{ user, setUser }}>
           <ToastContext.Provider value={{ toastConfig, setToastConfig }}>
             <AxiosInterceptor>
-              <div style={{ "display": "flex", "flexDirection": "column", "height": "100vh" }}>
+              <div style={{ "display": "flex", "flexDirection": "column", "height": "100vh", "maxHeight": "100vh" }}>
                 <div style={{ "width": "100%", "height": "fit-content" }}>
                   <TopNav tongleSideBar={tongleSideBar}></TopNav>
                 </div>
