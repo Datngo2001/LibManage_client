@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import LoginRegister from '../../components/LoginRegister/LoginRegister';
 import ProfileDropdown from '../../components/ProfileDropdown/ProfileDropdown'
-import SideNav from '../SideNav/SideNav'
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { logout } from '../../api/auth'
@@ -28,7 +27,7 @@ function TopNav(prop) {
                 navigate('/home');
                 setUser({})
             }
-        })
+        }).catch(err => console.log(err))
     }
 
     var profileElement;
@@ -39,13 +38,13 @@ function TopNav(prop) {
     }
 
     return (
-        <nav className="navbar navbar-light bg-light">
+        <nav className="navbar navbar-dark" style={{ "backgroundColor": "#178eeb" }}>
             <div className="container-fluid">
                 <div className='d-flex justify-content-between' style={{ width: '15%' }}>
-                    <button className="navbar-toggler" type="button" onClick={prop.tongleSideBar}>
+                    <button className="navbar-toggler " type="button" onClick={prop.tongleSideBar}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <Link to={'/'} className="navbar-brand text-center">UTE Library</Link>
+                    <Link to={'/'} className="navbar-brand text-center" style={{ "color": "white", "fontWeight": "bold" }}>UTE Library</Link>
                 </div>
                 {profileElement}
             </div>

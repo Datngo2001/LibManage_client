@@ -31,7 +31,7 @@ function BookTitleEditForm(prop) {
                     setInputs(() => res.data)
                     setLoading(false)
                 }
-            })
+            }).catch(err => console.log(err))
         } else {
             setInputs(() => ({
                 id: '',
@@ -40,8 +40,8 @@ function BookTitleEditForm(prop) {
                 image: '',
                 description: [],
                 createdAt: '',
-                books:[],
-                categorys:[]
+                books: [],
+                categorys: []
             }))
         }
 
@@ -52,7 +52,7 @@ function BookTitleEditForm(prop) {
         getCategory().then(res => {
             if (res.message === "OK")
                 setCategory(() => res.data)
-        })    
+        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {
@@ -67,7 +67,6 @@ function BookTitleEditForm(prop) {
     }
 
     const handleCategoryChange = (e) => {
-        debugger
         setInputs(values => ({ ...values, ["categorys"]: e.selectedRowsData }))
     }
 
@@ -81,15 +80,14 @@ function BookTitleEditForm(prop) {
                 description: inputs.description,
                 createdAt: inputs.createdAt,
                 categoryIds: inputs.categorys.map(g => g.id),
-                bookIds:[]
+                bookIds: []
             }).then(res => {
-                debugger
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
             })
         } else {
-            debugger
+
             updateBookTitle(inputs.id, {
                 title: inputs.title,
                 author: inputs.author,
@@ -97,7 +95,7 @@ function BookTitleEditForm(prop) {
                 description: inputs.description,
                 createdAt: inputs.createdAt,
                 categoryIds: inputs.categorys.map(g => g.id),
-                bookIds:[]
+                bookIds: []
             }).then(res => {
                 setLoading(false)
             }).catch(err => {
@@ -132,7 +130,7 @@ function BookTitleEditForm(prop) {
                             <label htmlFor="description" className="form-label">Description</label>
                             <input name='description' type="text" className="form-control" id="description" value={inputs.description || ""} onChange={handleChange} />
                         </div>
-                        
+
                         <div className="mb-3">
                             <label htmlFor="createdAt" className="form-label">Created At</label>
                             <input name='createdAt' type="text" className="form-control" id="createdAt" value={inputs.createdAt} readOnly />

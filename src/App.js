@@ -8,7 +8,7 @@ import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
-import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { me } from './api/auth'
@@ -18,7 +18,7 @@ import { AxiosInterceptor } from './api/_axiosClient'
 import SideNav from './layouts/SideNav/SideNav';
 import AppRoutes from './routes/AppRoutes';
 
-library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft);
+library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning);
 
 function App() {
   // Const
@@ -46,6 +46,7 @@ function App() {
         setUser({})
       }
     })
+      .catch(err => console.log(err))
   }, [])
 
   // Elements
@@ -74,9 +75,13 @@ function App() {
 
   function renderSideBar() {
     if (sideBarVisible && user.username !== undefined) {
+      let userPermissions = []
+      if (user.permissionCodes != undefined) {
+        userPermissions = user.permissionCodes
+      }
       return (
         <div style={{ "width": defauntSideBarWidth }}>
-          <SideNav></SideNav>
+          <SideNav userPermissions={userPermissions}></SideNav>
         </div>
       )
     } else {

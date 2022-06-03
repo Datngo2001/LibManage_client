@@ -36,13 +36,13 @@ function CatagoryManagementEditForm(prop) {
                 id: '',
                 name: '',
                 createdAt: '',
-                bookTitles:[]
+                bookTitles: []
             }))
         }
         getBookTitle().then(res => {
             if (res.message === "OK")
                 setBookTitles(() => res.data)
-        })
+        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {
@@ -52,7 +52,7 @@ function CatagoryManagementEditForm(prop) {
     }
 
     const handlebookTitleChange = (e) => {
-        debugger
+
         setInputs(values => ({ ...values, ["bookTitles"]: e.selectedRowsData }))
     }
 
@@ -64,13 +64,13 @@ function CatagoryManagementEditForm(prop) {
                 createdAt: inputs.createdAt,
                 bookTitleIds: inputs.bookTitles.map(g => g.id)
             }).then(res => {
-                debugger
+
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
             })
         } else {
-            debugger
+
             updateCategory(inputs.id, {
                 name: inputs.name,
                 createdAt: inputs.createdAt,
@@ -109,7 +109,7 @@ function CatagoryManagementEditForm(prop) {
                         showBorders={true}
                         allowColumnResizing={true}
                         columnAutoWidth={true}
-                        selectedRowKeys={inputs.bookTitles}     
+                        selectedRowKeys={inputs.bookTitles}
                         onSelectionChanged={handlebookTitleChange}>
                         <FilterRow visible={true} />
                         <Selection mode="multiple" />
