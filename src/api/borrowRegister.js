@@ -59,6 +59,22 @@ export async function updateBorrowRegister(id,
     return response
 }
 
+export async function confirmBorrowRegister(id) {
+    const url = `borrowregister/confirm/${id}`
+
+    const response = await axiosClient.put(url)
+
+    return response
+}
+
+export async function rejectBorrowRegister(id) {
+    const url = `borrowregister/reject/${id}`
+
+    const response = await axiosClient.put(url)
+
+    return response
+}
+
 export async function deleteBorrowRegister(id) {
     const url = `borrowregister/${id}`
     const response = await axiosClient.delete(url)

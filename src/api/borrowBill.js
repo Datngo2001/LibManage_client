@@ -41,6 +41,8 @@ export async function updateBorrowBill(id,
         userId,
         planReturnDate,
         bookIds,
+        isReturned,
+        notifyIds
     }
 ) {
     const url = `borrowbill/${id}`
@@ -48,9 +50,19 @@ export async function updateBorrowBill(id,
         userId: userId,
         planReturnDate: planReturnDate,
         bookIds: bookIds,
+        isReturned: isReturned,
+        notifyIds: notifyIds
     }
 
     const response = await axiosClient.put(url, data)
+
+    return response
+}
+
+export async function returnBorrowBill(id) {
+    const url = `borrowbill/return/${id}`
+
+    const response = await axiosClient.put(url)
 
     return response
 }
