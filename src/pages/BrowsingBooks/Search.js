@@ -54,8 +54,8 @@ function Search() {
                                     <p className="card-text"> {item.description}</p>
                                     <button
                                         type="button"
-                                        class="btn btn-outline-primary"
-                                    /*onClick={()=>{}} chờ trang bookDetails để nối vô*/
+                                        className="btn btn-outline-primary"
+                                    /*onClick={() => { }} chờ trang bookDetails để nối vô*/
                                     >
                                         Details
                                     </button>
@@ -65,7 +65,7 @@ function Search() {
                     );
                 })}
             </div>
-        </section>
+        </section >
     );
 }
 export default Search;
