@@ -21,7 +21,6 @@ function CatagoryManagementEditForm(prop) {
 
     // Get require data
     useEffect(() => {
-
         if (!isCreateForm) {
             setLoading(true)
             getCategoryById(prop.category.id).then(res => {

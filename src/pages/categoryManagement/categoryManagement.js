@@ -35,6 +35,7 @@ function CategoryManagement() {
     }, [formVisible])
 
     const showEditForm = (category) => {
+        debugger
         setCurrentCategory(() => category)
         setFormVisible(() => true)
     }
@@ -72,7 +73,7 @@ function CategoryManagement() {
             return (
                 <CatagoryManagementEditForm
                     onHiding={hideEditForm}
-                    booktitle={currentCategory}>
+                    category={currentCategory}>
                 </CatagoryManagementEditForm>
             )
         }

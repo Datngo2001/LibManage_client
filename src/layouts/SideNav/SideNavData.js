@@ -13,15 +13,15 @@ const navData = [
     },
     {
         pers: [],
-        name: 'Borrow Registers',
+        name: 'Reader Card',
         icon: ['fa-solid', 'fa-book'],
-        link: '/borrowregister'
+        link: '/readercard'
     },
     {
         pers: [],
-        name: 'Borrow Bill',
-        icon: ['fa-solid', 'fa-book'],
-        link: '/borrowbill          '
+        name: 'Cart',
+        icon: ['fa-solid', 'fa-shopping-cart'],
+        link: '/cart'
     },
     {
         pers: [1, 2, 3, 4],

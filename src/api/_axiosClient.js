@@ -26,7 +26,6 @@ const AxiosInterceptor = ({ children }) => {
     useEffect(() => {
 
         const resInterceptor = res => {
-            debugger
             if (res && res.data) {
                 if (needToToast.some(n => n == res.config.method)) {
                     setToastConfig({
