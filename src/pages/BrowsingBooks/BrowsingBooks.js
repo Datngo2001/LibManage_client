@@ -1,16 +1,21 @@
 import React, { useState, useRef, useCallback } from "react";
-import LoadingContext from "../../context/LoadingContext";
-import { getBookTitle } from "../../api/bookTitle";
+import { LoadIndicator } from 'devextreme-react/load-indicator';
 import useBookSearch from "../../hooks/useBookSearch";
+import Cookies from 'universal-cookie';
+import BookCard from "../../components/BookCard/BookCard";
 
 function BrowsingBooks() {
+  const cookies = new Cookies();
+  if (cookies.get('cart') == null) {
+    cookies.set('cart', [])
+  }
+
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const { books, hasMore, loading, error } = useBookSearch(query, page, 2)
   const observer = useRef()
 
   const lastBookElementRef = useCallback(node => {
-    console.log(node)
     if (loading) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
@@ -34,40 +39,24 @@ function BrowsingBooks() {
       }
 
       return (
-        <div ref={callback} key={index} className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-          <div className="card p-0 overflow-hidden h-100 shadow">
-            <img src={book.image} className="card-img-top" />
-            <div className="card-body">
-              <h5 className="card-title">{book.title}</h5>
-              <p className="card-text"> {book.description}</p>
-              <button
-                type="button"
-                className="btn btn-outline-primary">
-                Details
-              </button>
-            </div>
-          </div>
-        </div>
+        <BookCard key={index} book={book} callback={callback}></BookCard>
       );
     })
   }
 
   return (
-    <section className="py-4 container">
+    <section className="pt-2 container">
+      <input
+        placeholder="Search books ..."
+        type="text"
+        className="form-control mb-3"
+        value={query}
+        onChange={handleSearch}
+      />
       <div className="row justify-content-center">
-        <div className="col-12 mb-5">
-          <div className="mb-3 col-4 mx-auto text-center">
-            <label>Browsing</label>
-            <input
-              type="text"
-              className="from-control"
-              value={query}
-              onChange={handleSearch}
-            />
-          </div>
-        </div>
         {renderBooks()}
       </div>
+      <LoadIndicator visible={loading} className="m-auto" id="large-indicator" height={60} width={60} />
     </section >
   );
 }

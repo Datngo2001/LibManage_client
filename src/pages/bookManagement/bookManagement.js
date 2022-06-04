@@ -10,9 +10,7 @@ import {
     Button,
     SearchPanel
 } from 'devextreme-react/data-grid';
-import { deleteUser, getUsers } from '../../api/user';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
-import UserEditForm from '../../components/UserEditForm/UserEditForm';
 import LoadingContext from '../../context/LoadingContext';
 import { deleteBookTitle, getBookTitle } from '../../api/bookTitle';
 import BookTitleEditForm from '../../components/BookTitleEditForm/BookTitleEditForm';
@@ -92,7 +90,7 @@ function BookManagement() {
                 <FilterRow visible={true} />
                 <Selection mode="single" />
                 <Pager allowedPageSizes={200} showPageSizeSelector={true} />
-                <Paging defaultPageSize={100} />
+                <Paging defaultPageSize={5} />
                 <Editing mode={"row"} allowDeleting={true} allowUpdating={true} />
                 <SpeedDialAction
                     icon="add"
@@ -107,7 +105,7 @@ function BookManagement() {
                 <Column dataField="description" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
-                    
+
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
                 </Column>

@@ -18,6 +18,12 @@ const navData = [
         link: '/readercard'
     },
     {
+        pers: [],
+        name: 'Cart',
+        icon: ['fa-solid', 'fa-shopping-cart'],
+        link: '/cart'
+    },
+    {
         pers: [1, 2, 3, 4],
         groupName: 'System management',
         icon: ['fa-solid', 'fa-computer'],

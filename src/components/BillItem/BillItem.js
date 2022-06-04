@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function BillItem(prop) {
     const data = prop.data
-    const firstBookImg = data.books[0].BookTitle.image
+    const firstBookImg = ((data.books[0].BookTitle == null) ? '' : data.books[0].BookTitle.image)
     const borrowDate = new Date(data.borrowDate).toLocaleString()
     const planReturnDate = new Date(data.planReturnDate).toLocaleString()
     let cardStyle
@@ -19,7 +19,7 @@ function BillItem(prop) {
 
     function renderBookList() {
         return data.books.map(book => {
-            return <p key={book.id} className='card-text mb-1'>{book.BookTitle.title}</p>
+            return <p key={book.id} className='card-text mb-1'>{((data.books[0].BookTitle == null) ? '' : data.books[0].BookTitle.title)}</p>
         })
     }
 

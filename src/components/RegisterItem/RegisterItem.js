@@ -3,13 +3,13 @@ import React from 'react'
 
 function RegisterItem(prop) {
     const data = prop.data
-    const firstBookImg = data.books[0].BookTitle.image
+    const firstBookImg = ((data.books[0].BookTitle == null) ? '' : data.books[0].BookTitle.image)
     const createDate = new Date(data.createDate).toLocaleString()
     const planReturnDate = new Date(data.planReturnDate).toLocaleString()
 
     function renderBookList() {
         return data.books.map(book => {
-            return <p key={book.id} className='mb-1'>{book.BookTitle.title}</p>
+            return <p key={book.id} className='mb-1'>{((data.books[0].BookTitle == null) ? '' : data.books[0].BookTitle.title)}</p>
         })
     }
 
