@@ -1,4 +1,19 @@
+import axios from "axios"
 import axiosClient from "./_axiosClient"
+
+export async function searchBookTitle({ title, page, limit }, cancel) {
+    const url = `booktitle/search`
+    const response = await axiosClient.get(url, {
+        params: {
+            title: title,
+            page: page,
+            limit: limit
+        },
+        cancelToken: new axios.CancelToken(c => cancel = c)
+    })
+
+    return response
+}
 
 export async function getBookTitle() {
     const url = 'booktitle'
