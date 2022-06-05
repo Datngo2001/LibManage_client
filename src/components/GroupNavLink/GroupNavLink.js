@@ -11,7 +11,8 @@ function GroupNavLink(prop) {
             <div className="accordion-item mb-2">
                 <h2 className="accordion-header" id={`heading${prop.groupId}`}>
                     <button className="accordion-button collapsed p-3" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${prop.groupId}`} aria-expanded="false" aria-controls={`collapse${prop.groupId}`}>
-                        <span><FontAwesomeIcon icon={prop.icon} />  {prop.title}</span>
+                        <div className='d-inline-block' style={{ "width": "15%" }}><FontAwesomeIcon icon={prop.icon} /></div>
+                        <div className='d-inline-block'>{prop.title}</div>
                     </button>
                 </h2>
                 <div id={`collapse${prop.groupId}`} className="accordion-collapse collapse" aria-labelledby={`heading${prop.groupId}`}>

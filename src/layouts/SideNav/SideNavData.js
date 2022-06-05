@@ -14,7 +14,7 @@ const navData = [
     {
         pers: [],
         name: 'Reader Card',
-        icon: ['fa-solid', 'fa-book'],
+        icon: ['fa-solid', 'fa-id-card'],
         link: '/readercard'
     },
     {
@@ -50,13 +50,13 @@ const navData = [
             {
                 pers: [5, 6, 7, 8, 9, 10, 11],
                 name: 'Books Manage',
-                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
+                icon: ['fa-solid', 'fa-book'],
                 link: '/booktitlemanage'
             },
             {
                 pers: [5, 6, 7, 8, 9, 10, 11],
                 name: 'Category Manage',
-                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
+                icon: ['fa-solid', 'fa-book'],
                 link: '/categorymanage'
             }
         ]
@@ -64,12 +64,12 @@ const navData = [
     {
         pers: [5, 12, 13, 14, 15, 16],
         groupName: 'Borrower Management',
-        icon: ['fa-solid', 'fa-book'],
+        icon: ['fa-solid', 'fa-book-open-reader'],
         navLinks: [
             {
                 pers: [5, 12, 13, 14, 15, 16],
                 name: 'Borrower Manage',
-                icon: ['fa-solid', 'fa-tent-arrow-turn-left'],
+                icon: ['fa-solid', 'fa-book'],
                 link: '/borrowermanage'
             },
         ]

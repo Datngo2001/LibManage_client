@@ -15,7 +15,10 @@ function NavLink(prop) {
 
     return (
         <Link to={prop.link} style={style} className="list-group-item list-group-item-action text-start mb-2 rounded">
-            <FontAwesomeIcon icon={prop.icon} /> {prop.name}
+            <div>
+                <div className='d-inline-block' style={{ "width": "15%" }}><FontAwesomeIcon icon={prop.icon} /></div>
+                <div className='d-inline-block'>{prop.name}</div>
+            </div>
         </Link>
     )
 }

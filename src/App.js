@@ -8,7 +8,7 @@ import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
-import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning, faX, faXmarkCircle, faCircleXmark, faShare, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning, faX, faXmarkCircle, faCircleXmark, faShare, faCartShopping, faIdCard, faBookReader, faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { me } from './api/auth'
@@ -19,7 +19,8 @@ import SideNav from './layouts/SideNav/SideNav';
 import AppRoutes from './routes/AppRoutes';
 import Cookies from 'universal-cookie';
 
-library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faX, faXmarkCircle, faShare, faWarning, faCartShopping);
+library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft,
+  faCheck, faX, faXmarkCircle, faShare, faWarning, faCartShopping, faIdCard, faBookOpenReader);
 
 function App() {
   // Const
