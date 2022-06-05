@@ -17,7 +17,6 @@ export async function getCategoryById(id) {
 export async function createCategory(
     {
         name,
-        bookTitleIds
     }
 ) {
     const data = {
@@ -36,7 +35,6 @@ export async function createCategory(
 export async function updateCategory(id,
     {
         name,
-        bookTitleIds
     }
 ) {
     const url = `category/${id}`

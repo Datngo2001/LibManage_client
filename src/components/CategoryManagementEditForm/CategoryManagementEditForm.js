@@ -15,7 +15,6 @@ import CategoryManagement from '../../pages/categoryManagement/categoryManagemen
 
 function CatagoryManagementEditForm(prop) {
     const setLoading = useContext(LoadingContext);
-    const [bookTitles, setBookTitles] = useState([])
     const [inputs, setInputs] = useState({});
     let isCreateForm = (prop.category == undefined)
 
@@ -35,13 +34,8 @@ function CatagoryManagementEditForm(prop) {
                 id: '',
                 name: '',
                 createdAt: '',
-                bookTitles: []
             }))
         }
-        getBookTitle().then(res => {
-            if (res.message === "OK")
-                setBookTitles(() => res.data)
-        }).catch(err => console.log(err))
     }, [])
 
     const handleChange = (event) => {
@@ -50,10 +44,6 @@ function CatagoryManagementEditForm(prop) {
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    const handlebookTitleChange = (e) => {
-
-        setInputs(values => ({ ...values, ["bookTitles"]: e.selectedRowsData }))
-    }
 
     const handleSave = () => {
         setLoading(true)
@@ -61,7 +51,6 @@ function CatagoryManagementEditForm(prop) {
             createCategory({
                 name: inputs.name,
                 createdAt: inputs.createdAt,
-                bookTitleIds: inputs.bookTitles.map(g => g.id)
             }).then(res => {
                 setLoading(false)
             }).catch(err => {
@@ -72,7 +61,6 @@ function CatagoryManagementEditForm(prop) {
             updateCategory(inputs.id, {
                 name: inputs.name,
                 createdAt: inputs.createdAt,
-                bookTitleIds: inputs.bookTitles.map(g => g.id)
             }).then(res => {
                 setLoading(false)
             }).catch(err => {
@@ -100,20 +88,6 @@ function CatagoryManagementEditForm(prop) {
                             <input name='createdAt' type="text" className="form-control" id="createdAt" value={inputs.createdAt} readOnly />
                         </div>
                     </form>
-                    <hr></hr>
-                    <h4>Book Titles</h4>
-                    <DataGrid
-                        dataSource={bookTitles}
-                        showBorders={true}
-                        allowColumnResizing={true}
-                        columnAutoWidth={true}
-                        selectedRowKeys={inputs.bookTitles}
-                        onSelectionChanged={handlebookTitleChange}>
-                        <FilterRow visible={true} />
-                        <Selection mode="multiple" />
-                        <Pager showPageSizeSelector={true} />
-                        <Paging defaultPageSize={8} />
-                    </DataGrid>
                     <div className='d-flex justify-content-around mt-3'>
                         <button type="button" className="btn btn-danger w-25" onClick={prop.onHiding}>Cancel</button>
                         <button type="button" className="btn btn-success w-25" onClick={handleSave}>Save</button>
