@@ -21,7 +21,6 @@ export async function createCategory(
 ) {
     const data = {
         name: name,
-        bookTitleIds: bookTitleIds
     }
     const url = 'category'
     const response = await axiosClient.post(
@@ -40,7 +39,6 @@ export async function updateCategory(id,
     const url = `category/${id}`
     const data = {
         name: name,
-        bookTitleIds: bookTitleIds
     }
 
     const response = await axiosClient.put(url, data)
