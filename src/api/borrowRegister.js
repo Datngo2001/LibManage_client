@@ -24,8 +24,8 @@ export async function createBorrowRegister(
 ) {
     const data = {
         note: note,
-        planReturnDate: planReturnDate,
-        bookIds: bookIds,
+        planReturnDate: new Date(planReturnDate),
+        bookTitileIds: bookIds,
     }
     const url = 'borrowregister'
     const response = await axiosClient.post(

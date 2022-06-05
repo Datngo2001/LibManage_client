@@ -40,7 +40,6 @@ function BillItem(prop) {
         }
 
         let remain = dateDiff(new Date(data.planReturnDate), new Date());
-        debugger
         if (remain < 0) {
             return <span className='fs-3 text-warning'><FontAwesomeIcon icon={"warning"}></FontAwesomeIcon></span>
         }

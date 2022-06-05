@@ -94,7 +94,6 @@ function BookManagement() {
 
     // make sure rerender form when state change
     const renderEditForm = () => {
-        debugger
         if (bookTitleFormConfig.visible == false) {
             return (<div></div>)
         } else {

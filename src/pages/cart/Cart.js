@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Cookies from 'universal-cookie';
 import DateBox from 'devextreme-react/date-box';
 import TextArea from 'devextreme-react/text-area';
 import { createBorrowRegister } from '../../api/borrowRegister'
+import LoadingContext from '../../context/LoadingContext';
 
 function Cart() {
+    const setLoading = useContext(LoadingContext);
     const cookies = new Cookies();
     const [cart, setCart] = useState(cookies.get('cart'))
     const [registerForm, setRegisterForm] = useState({
@@ -15,6 +17,7 @@ function Cart() {
     })
 
     function handleRegister() {
+        setLoading(true)
         createBorrowRegister({
             note: registerForm.note,
             planReturnDate: registerForm.planReturnDate,
@@ -25,8 +28,10 @@ function Cart() {
                 ...form, bookTitileIds: []
             }))
             cookies.set('cart', [])
+            setLoading(false)
         }).catch(err => {
             console.log(err)
+            setLoading(false)
         })
     }
 
@@ -109,7 +114,7 @@ function Cart() {
                                                 className="form-control"
                                                 onValueChanged={handleChange('note')} />
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary w-100" onClick={handleRegister}>Register</button>
+                                        <button type="button" className="btn btn-outline-primary w-100" onClick={handleRegister}>Register</button>
                                     </div>
                                 </div>
                             </div>

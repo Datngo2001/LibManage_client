@@ -32,6 +32,7 @@ function ReaderDetail(prop) {
         borrower.borrowRegister.forEach(register => {
             register.bookNames = ""
             register.books.forEach(book => {
+                if (book.BookTitle == null) return
                 register.bookNames += (book.BookTitle.title + ", ")
             })
             if (register.isRejected) {
@@ -44,6 +45,7 @@ function ReaderDetail(prop) {
         borrower.borrowBills.forEach(bill => {
             bill.bookNames = ""
             bill.books.forEach(book => {
+                if (book.BookTitle == null) return
                 bill.bookNames += (book.BookTitle.title + ", ")
                 bill.createDate = bill.borrowDate
             })

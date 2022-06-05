@@ -13,7 +13,6 @@ import { createBookTitle, getBookTitleById, updateBookTitle } from '../../api/bo
 import { getCategory } from '../../api/category';
 
 function BookTitleEditForm(prop) {
-    debugger
     const setLoading = useContext(LoadingContext);
     const [category, setCategory] = useState([]);
     let isCreateForm = prop.isCreate
@@ -114,7 +113,7 @@ function BookTitleEditForm(prop) {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <input name='description' type="text" className="form-control" id="description" value={inputs.description || ""} onChange={handleChange} />
+                            <textarea name='description' rows={5} type="text" className="form-control" id="description" value={inputs.description || ""} onChange={handleChange} />
                         </div>
 
                         <div className="mb-3">

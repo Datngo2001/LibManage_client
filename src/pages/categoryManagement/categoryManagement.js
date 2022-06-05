@@ -35,7 +35,6 @@ function CategoryManagement() {
     }, [formVisible])
 
     const showEditForm = (category) => {
-        debugger
         setCurrentCategory(() => category)
         setFormVisible(() => true)
     }

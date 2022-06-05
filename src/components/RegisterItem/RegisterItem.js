@@ -14,7 +14,6 @@ function RegisterItem(prop) {
     }
 
     function renderStatusIcon() {
-        debugger
         if (data.isRejected == true) {
             return <span className='fs-3 text-danger'><FontAwesomeIcon icon={"xmark-circle"}></FontAwesomeIcon></span>
         }
