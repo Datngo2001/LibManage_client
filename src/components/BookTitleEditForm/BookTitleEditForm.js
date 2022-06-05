@@ -13,27 +13,35 @@ import { createBookTitle, getBookTitleById, updateBookTitle } from '../../api/bo
 import { getCategory } from '../../api/category';
 
 function BookTitleEditForm(prop) {
+    debugger
     const setLoading = useContext(LoadingContext);
     const [category, setCategory] = useState([]);
-    let bookTitle
     let isCreateForm = prop.isCreate
-    if (isCreateForm) {
-        bookTitle = {
-            id: '',
-            title: '',
-            author: '',
-            image: '',
-            description: '',
-            createdAt: '',
-            categorys: []
-        }
-    } else {
-        bookTitle = prop.booktitle
-    }
-    const [inputs, setInputs] = useState({ ...bookTitle });
+    const [inputs, setInputs] = useState({});
 
     // Get require data
     useEffect(() => {
+        setLoading(true)
+        if (!isCreateForm) {
+            setLoading(true)
+            getBookTitleById(prop.booktitle.id).then(res => {
+                if (res.message === "OK") {
+                    res.data.password = ""
+                    setInputs(() => res.data)
+                    setLoading(false)
+                }
+            }).catch(err => console.log(err))
+        } else {
+            setInputs(() => ({
+                id: '',
+                title: '',
+                author: '',
+                image: '',
+                description: '',
+                createdAt: '',
+                categorys: []
+            }))
+        }
         getCategory().then(res => {
             if (res.message === "OK")
                 setCategory(() => res.data)

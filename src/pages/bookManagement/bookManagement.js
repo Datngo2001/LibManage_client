@@ -24,7 +24,10 @@ function BookManagement() {
         data: {}
     })
     const [formVisible, setFormVisible] = useState(false)
-    const [currentBookTitle, setCurrentBookTitle] = useState(undefined)
+    const [bookTitleDetailFormConfig, setBookTitleDetailFormConfig] = useState({
+        visible: false,
+        data: {}
+    })
 
     // Get require data
     useEffect(() => {
@@ -47,6 +50,14 @@ function BookManagement() {
         })
     }
 
+    const hideDetailForm = () => {
+        setBookTitleDetailFormConfig({
+            visible: false,
+            data: {}
+        })
+    }
+
+
     const handleEdit = (e) => {
         setBookTitleFormConfig({
             visible: true,
@@ -63,8 +74,11 @@ function BookManagement() {
         })
     }
 
-    const handleAddBook = (e) => {
-        let addbook = e.row.data
+    const handleDetail = (e) => {
+        setBookTitleDetailFormConfig({
+            visible: true,
+            data: e.row.data
+        })
     }
 
     const handleDelete = (e) => {
@@ -80,7 +94,8 @@ function BookManagement() {
 
     // make sure rerender form when state change
     const renderEditForm = () => {
-        if (bookTitleFormConfig.visibleformVisible == false) {
+        debugger
+        if (bookTitleFormConfig.visible == false) {
             return (<div></div>)
         } else {
             return (
@@ -96,14 +111,14 @@ function BookManagement() {
     }
 
     const renderAddForm = () => {
-        if (formVisible == false) {
+        if (bookTitleDetailFormConfig.visible == false) {
             return (<div></div>)
         } else {
             return (
                 <BookAddForm
-                    onHiding={hideEditForm}
-                    booktitle={bookTitleFormConfig.data}
-                    visible={bookTitleFormConfig.visible}
+                    onHiding={hideDetailForm}
+                    booktitle={bookTitleDetailFormConfig.data}
+                    visible={bookTitleDetailFormConfig.visible}
                 >
                 </BookAddForm>
             )
@@ -139,7 +154,7 @@ function BookManagement() {
                 <Column dataField="description" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
-                    <Button hint="Books Detail" ><button className='btn btn-warning btn-sm'>Detail</button></Button>
+                    <Button hint="Books Detail" onClick={handleDetail} ><button className='btn btn-warning btn-sm'>Detail</button></Button>
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
                 </Column>
