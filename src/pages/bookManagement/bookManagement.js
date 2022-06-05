@@ -14,7 +14,7 @@ import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
 import LoadingContext from '../../context/LoadingContext';
 import { deleteBookTitle, getBookTitle } from '../../api/bookTitle';
 import BookTitleEditForm from '../../components/BookTitleEditForm/BookTitleEditForm';
-
+import BookAddForm from '../../components/AddBookForm/BookAddForm';
 function BookManagement() {
     const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
@@ -47,8 +47,13 @@ function BookManagement() {
         showEditForm(booktitle)
     }
 
-    const handleAdd = (e) => {
+    const   handleAdd = (e) => {
         showEditForm(undefined)
+    }
+
+    const handleAddBook = (e) => {
+        let addbook = e.row.data
+        showEditForm(addbook)
     }
 
     const handleDelete = (e) => {
@@ -70,8 +75,23 @@ function BookManagement() {
             return (
                 <BookTitleEditForm
                     onHiding={hideEditForm}
-                    booktitle={currentBookTitle}>
+                    booktitle={currentBookTitle}
+                    >
                 </BookTitleEditForm>
+            )
+        }
+    }
+ 
+    const renderAddForm = () => {
+        if (formVisible == false) {
+            return (<div></div>)
+        } else {
+            return (
+                <BookAddForm
+                    onHiding={hideEditForm}
+                    booktitle={currentBookTitle}
+                    >
+                </BookAddForm>
             )
         }
     }
@@ -101,7 +121,7 @@ function BookManagement() {
                 <Column dataField="id" />
                 <Column dataField="title" />
                 <Column dataField="author" />
-                <Column dataField="image" />
+                <Column dataField="image" cellRender={cellRender}/>
                 <Column dataField="description" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
@@ -110,9 +130,13 @@ function BookManagement() {
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
                 </Column>
             </DataGrid>
-            {renderEditForm()}
+            {renderAddForm()}
+            {renderEditForm()} 
         </div>
     )
 }
 
+function cellRender(data) {
+    return <img height={100} src={data.value} />
+}
 export default BookManagement
