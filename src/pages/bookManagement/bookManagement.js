@@ -18,6 +18,11 @@ import BookAddForm from '../../components/AddBookForm/BookAddForm';
 function BookManagement() {
     const setLoading = useContext(LoadingContext);
     const [data, setData] = useState({})
+    const [bookTitleFormConfig, setBookTitleFormConfig] = useState({
+        visible: false,
+        isCreate: true,
+        data: {}
+    })
     const [formVisible, setFormVisible] = useState(false)
     const [currentBookTitle, setCurrentBookTitle] = useState(undefined)
 
@@ -30,30 +35,36 @@ function BookManagement() {
         }).catch(err => {
             setLoading(false)
         })
-    }, [formVisible])
+    }, [bookTitleFormConfig.visible])
 
-    const showEditForm = (booktitle) => {
-        setCurrentBookTitle(() => booktitle)
-        setFormVisible(() => true)
-    }
+
 
     const hideEditForm = () => {
-        setCurrentBookTitle({})
-        setFormVisible(false)
+        setBookTitleFormConfig({
+            visible: false,
+            isCreate: false,
+            data: {}
+        })
     }
 
     const handleEdit = (e) => {
-        let booktitle = e.row.data
-        showEditForm(booktitle)
+        setBookTitleFormConfig({
+            visible: true,
+            isCreate: false,
+            data: e.row.data
+        })
     }
 
-    const   handleAdd = (e) => {
-        showEditForm(undefined)
+    const handleAdd = (e) => {
+        setBookTitleFormConfig({
+            visible: true,
+            isCreate: true,
+            data: {}
+        })
     }
 
     const handleAddBook = (e) => {
         let addbook = e.row.data
-        showEditForm(addbook)
     }
 
     const handleDelete = (e) => {
@@ -69,19 +80,21 @@ function BookManagement() {
 
     // make sure rerender form when state change
     const renderEditForm = () => {
-        if (formVisible == false) {
+        if (bookTitleFormConfig.visibleformVisible == false) {
             return (<div></div>)
         } else {
             return (
                 <BookTitleEditForm
                     onHiding={hideEditForm}
-                    booktitle={currentBookTitle}
-                    >
+                    booktitle={bookTitleFormConfig.data}
+                    visible={bookTitleFormConfig.visible}
+                    isCreate={bookTitleFormConfig.isCreate}
+                >
                 </BookTitleEditForm>
             )
         }
     }
- 
+
     const renderAddForm = () => {
         if (formVisible == false) {
             return (<div></div>)
@@ -89,15 +102,16 @@ function BookManagement() {
             return (
                 <BookAddForm
                     onHiding={hideEditForm}
-                    booktitle={currentBookTitle}
-                    >
+                    booktitle={bookTitleFormConfig.data}
+                    visible={bookTitleFormConfig.visible}
+                >
                 </BookAddForm>
             )
         }
     }
 
     return (
-        <div className='m-3'>
+        <div className='m-3 mb-5'>
             <DataGrid
                 dataSource={data}
                 showBorders={true}
@@ -121,17 +135,17 @@ function BookManagement() {
                 <Column dataField="id" />
                 <Column dataField="title" />
                 <Column dataField="author" />
-                <Column dataField="image" cellRender={cellRender}/>
+                <Column dataField="image" cellRender={cellRender} />
                 <Column dataField="description" />
                 <Column dataField="createdAt" />
                 <Column type="buttons">
-
+                    <Button hint="Books Detail" ><button className='btn btn-warning btn-sm'>Detail</button></Button>
                     <Button hint="Edit" onClick={handleEdit}><button className='btn btn-success btn-sm'>Edit</button></Button>
                     <Button name="delete" ><button className='btn btn-danger btn-sm'>Delete</button></Button>
                 </Column>
             </DataGrid>
             {renderAddForm()}
-            {renderEditForm()} 
+            {renderEditForm()}
         </div>
     )
 }

@@ -36,7 +36,6 @@ export async function createBookTitle(
         image,
         description,
         categoryIds,
-        bookIds,
     }
 ) {
     const data = {
@@ -45,7 +44,6 @@ export async function createBookTitle(
         image: image,
         description: description,
         categoryIds: categoryIds,
-        bookIds: bookIds,
     }
     const url = 'booktitle'
     const response = await axiosClient.post(
@@ -63,7 +61,6 @@ export async function updateBookTitle(id,
         image,
         description,
         categoryIds,
-        bookIds,
     }
 ) {
     const url = `booktitle/${id}`
@@ -73,7 +70,6 @@ export async function updateBookTitle(id,
         image: image,
         description: description,
         categoryIds: categoryIds,
-        bookIds: bookIds,
     }
 
     const response = await axiosClient.put(url, data)
