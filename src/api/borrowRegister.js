@@ -18,14 +18,12 @@ export async function getBorrowRegisterById(id) {
 export async function createBorrowRegister(
     {
         note,
-        isConfirmed,
         planReturnDate,
         bookIds,
     }
 ) {
     const data = {
         note: note,
-        isConfirmed: isConfirmed,
         planReturnDate: planReturnDate,
         bookIds: bookIds,
     }

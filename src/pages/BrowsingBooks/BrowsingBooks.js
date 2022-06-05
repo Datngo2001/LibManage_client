@@ -6,9 +6,7 @@ import BookCard from "../../components/BookCard/BookCard";
 
 function BrowsingBooks() {
   const cookies = new Cookies();
-  if (cookies.get('cart') == null) {
-    cookies.set('cart', [])
-  }
+  const cart = cookies.get('cart')
 
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
@@ -39,7 +37,7 @@ function BrowsingBooks() {
       }
 
       return (
-        <BookCard key={index} book={book} callback={callback}></BookCard>
+        <BookCard key={index} book={book} callback={callback} cart={cart}></BookCard>
       );
     })
   }

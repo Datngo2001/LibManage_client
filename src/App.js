@@ -17,6 +17,7 @@ import { Toast } from 'devextreme-react/toast';
 import { AxiosInterceptor } from './api/_axiosClient'
 import SideNav from './layouts/SideNav/SideNav';
 import AppRoutes from './routes/AppRoutes';
+import Cookies from 'universal-cookie';
 
 library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faX, faXmarkCircle, faShare, faWarning, faCartShopping);
 
@@ -24,6 +25,10 @@ function App() {
   // Const
   const defauntSideBarWidth = "22%"
   const defaunContentWidth = "78%"
+  const cookies = new Cookies();
+  if (cookies.get('cart') == null) {
+    cookies.set('cart', [])
+  }
 
   // Hooks
   const [toastConfig, setToastConfig] = useState({
