@@ -7,7 +7,7 @@ export default function Home() {
         <div>
             <div className="row m-auto mt-3 section-1">
                 <div className="left">
-                    <p className="color-primary-dark">SUMMER 2020</p>
+                    <p className="color-primary-dark">SUMMER 2022</p>
                     <h1>UTE Online Library</h1>
                     <p className="color-secondary">We know how large object will act,</p>
                     <p className="color-secondary">but things on a small scale</p>

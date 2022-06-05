@@ -46,7 +46,7 @@ function ReaderDetail(prop) {
             bill.bookNames = ""
             bill.books.forEach(book => {
                 if (book.BookTitle == null) return
-                bill.bookNames += (book.BookTitle.title + ", ")
+                bill.bookNames += (book.BookTitle.title + "\n")
                 bill.createDate = bill.borrowDate
             })
             borrowInfos.push(bill)
