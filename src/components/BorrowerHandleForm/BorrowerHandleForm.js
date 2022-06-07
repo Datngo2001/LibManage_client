@@ -70,10 +70,10 @@ function BorrowerHandleForm(prop) {
 
     return (
         <Popup visible={true} onHiding={prop.onHiding}>
-            <ScrollView width='100%' height='100%'>
-                <div className='row m-0'>
+            <ScrollView width='100%'>
+                <div className='row m-0' style={{ "height": "300px" }}>
                     <div className='col container-fluid text-center'>
-                        <img src={image}></img>
+                        <img className="img-fluid" src={image} style={{ "height": "300px" }}></img>
                     </div>
                     <div className='col'>
                         <List

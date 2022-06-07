@@ -64,8 +64,8 @@ function BillItem(prop) {
                         <p className="card-text mb-1"><small className="text-muted">Plan return date:</small></p>
                         <h5 className="card-title">{planReturnDate}</h5>
                         <p className="card-text mb-1"><small className="text-muted">Books:</small></p>
-                        {renderReturnDate()}
                         {renderBookList()}
+                        {renderReturnDate()}
                     </div>
                 </div>
             </div>

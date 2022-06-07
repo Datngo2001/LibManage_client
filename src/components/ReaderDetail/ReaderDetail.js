@@ -33,7 +33,7 @@ function ReaderDetail(prop) {
             register.bookNames = ""
             register.books.forEach(book => {
                 if (book.BookTitle == null) return
-                register.bookNames += (book.BookTitle.title + ", ")
+                register.bookNames += (book.BookTitle.title + "\n")
             })
             if (register.isRejected) {
                 rejected.push(register)
