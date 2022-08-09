@@ -27,7 +27,7 @@ const AxiosInterceptor = ({ children }) => {
 
         const resInterceptor = res => {
             if (res && res.data) {
-                if (needToToast.some(n => n == res.config.method)) {
+                if (needToToast.some(n => n === res.config.method)) {
                     setToastConfig({
                         ...toastConfig,
                         isVisible: true,

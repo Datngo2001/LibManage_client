@@ -3,19 +3,19 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import './App.css';
-import UserContext from './context/UserContext'
 import { useEffect, useState } from 'react';
 import Spinner from './components/Spinner/Spinner';
 import LoadingContext from './context/LoadingContext';
 import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWarning, faX, faXmarkCircle, faCircleXmark, faShare, faCartShopping, faIdCard, faBookReader, faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { me } from './api/auth'
 import ToastContext from './context/ToastContext';
 import { Toast } from 'devextreme-react/toast';
 import { AxiosInterceptor } from './api/_axiosClient'
 import Cookies from 'universal-cookie';
 import BasicLayout from './layouts/BasicLayout/BasicLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { CHECK_REQUEST, SIGNIN_REQUEST } from "./store/reducer/user/userActionTypes"
 
 library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft,
   faCheck, faX, faXmarkCircle, faShare, faWarning, faCartShopping, faIdCard, faBookOpenReader);
@@ -27,26 +27,20 @@ function App() {
   }
 
   // Hooks
+  const dispatch = useDispatch()
   const [toastConfig, setToastConfig] = useState({
     isVisible: false,
     type: 'info',
     message: '',
   });
-  const [user, setUser] = useState({})
+  const { user } = useSelector(state => state.user)
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (user.username !== undefined) {
+    if (user != null) {
       return
     }
-    me().then(res => {
-      if (res.message === 'OK') {
-        setUser(res.data)
-      } else {
-        setUser({})
-      }
-    })
-      .catch(err => console.log(err))
+    dispatch({ type: CHECK_REQUEST })
   }, [])
 
   // Elements
@@ -68,13 +62,11 @@ function App() {
   return (
     <div className="App d-block h-100">
       <LoadingContext.Provider value={setLoading}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <ToastContext.Provider value={{ toastConfig, setToastConfig }}>
-            <AxiosInterceptor>
-              <BasicLayout></BasicLayout>
-            </AxiosInterceptor>
-          </ToastContext.Provider>
-        </UserContext.Provider>
+        <ToastContext.Provider value={{ toastConfig, setToastConfig }}>
+          <AxiosInterceptor>
+            <BasicLayout></BasicLayout>
+          </AxiosInterceptor>
+        </ToastContext.Provider>
       </LoadingContext.Provider>
       {spinnerElement}
       <Toast

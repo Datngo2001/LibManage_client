@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
-import UserContext from '../../context/UserContext';
+import { useSelector } from 'react-redux';
 
 function ProfileDropdown(props) {
-    const { user } = useContext(UserContext);
+    const { user } = useSelector(state => state.user);
 
     return (
         <div className="dropdown" >

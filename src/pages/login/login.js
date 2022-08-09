@@ -1,14 +1,17 @@
 import { useContext, useState } from 'react'
-import { login } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
-import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
+import { useDispatch } from 'react-redux';
+import { SIGNIN_REQUEST } from '../../store/reducer/user/userActionTypes';
 
 export default function Login() {
-    const { user, setUser } = useContext(UserContext);
+    const dispatch = useDispatch()
     const setLoading = useContext(LoadingContext);
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({
+        username: "",
+        password: ""
+    });
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -20,18 +23,13 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setLoading(true)
-        login({
-            username: inputs.username,
-            password: inputs.password
-        }).then(res => {
-            setLoading(false)
-            if (res.message === 'login') {
-                navigate('/home');
-                setUser(res.data)
+        dispatch({
+            type: SIGNIN_REQUEST, payload: {
+                username: inputs.username,
+                password: inputs.password
             }
-        }).catch(err => {
-            setLoading(false)
         })
+        setLoading(false)
     }
 
     return (

@@ -1,10 +1,11 @@
-import { useContext, useState, useEffect } from 'react'
-import UserContext from '../../context/UserContext';
+import { useContext, useState } from 'react'
 import LoadingContext from '../../context/LoadingContext';
-import { updateUserProfile } from '../../api/user'
+import { useDispatch, useSelector } from 'react-redux';
+import { UPDATE_PROFILE_REQUEST } from '../../store/reducer/user/userActionTypes';
 
 export default function ReaderProfile() {
-    const { user, setUser } = useContext(UserContext);
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.user);
     const setLoading = useContext(LoadingContext);
 
     const getDefauntInput = () => ({
@@ -28,24 +29,18 @@ export default function ReaderProfile() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setLoading(true)
-        updateUserProfile({
-            password: inputs.password,
-            newPassword: inputs.newPassword,
-            fname: inputs.fname,
-            lname: inputs.lname,
-            email: inputs.email
-        }).then(res => {
-            setLoading(false)
-            setUser(u => ({
-                ...u,
-                fname: res.data.fname,
-                lname: res.data.lname,
-                email: res.data.email
-            }))
-            setEditing(value => false)
-        }).catch(err => {
-            setLoading(false)
+        dispatch({
+            type: UPDATE_PROFILE_REQUEST,
+            payload: {
+                password: inputs.password,
+                newPassword: inputs.newPassword,
+                fname: inputs.fname,
+                lname: inputs.lname,
+                email: inputs.email
+            }
         })
+        setEditing(value => false)
+        setLoading(false)
     }
 
     const handleEdit = (e) => {

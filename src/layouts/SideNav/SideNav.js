@@ -5,7 +5,6 @@ import NavLink from '../../components/NavLink/NavLink'
 import styles from './sideNav.module.css'
 
 function SideNav({ userPermissions }) {
-    debugger
     const groups = sideNavData
     const groupElements = groups.map((group, index) => {
         if (!isAllowed(group.pers)) {

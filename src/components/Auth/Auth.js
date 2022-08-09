@@ -1,8 +1,8 @@
 import { React, useContext } from 'react'
-import UserContext from '../../context/UserContext';
+import { useSelector } from 'react-redux';
 
 function Auth(props) {
-    const { user } = useContext(UserContext);
+    const { user } = useSelector(state => state.user);
     if (!user.permissionCodes) {
         return <div></div>
     }

@@ -2,39 +2,20 @@ import React, { useContext } from 'react'
 import LoginRegister from '../../components/LoginRegister/LoginRegister';
 import ProfileDropdown from '../../components/ProfileDropdown/ProfileDropdown'
 import { Link } from 'react-router-dom';
-import UserContext from '../../context/UserContext';
-import { logout } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGNOUT } from '../../store/reducer/user/userActionTypes';
 
 function TopNav(prop) {
-    const { user, setUser } = useContext(UserContext);
+    const dispatch = useDispatch()
+    const { user } = useSelector(state => state.user);
     const setLoading = useContext(LoadingContext);
     const navigate = useNavigate();
 
-    var loggedin
-    if (user.username) {
-        loggedin = true
-    } else {
-        loggedin = false
-    }
-
     const handleOnClick = () => {
         setLoading(true)
-        logout().then(res => {
-            setLoading(false)
-            if (res.message === 'logout') {
-                navigate('/home');
-                setUser({})
-            }
-        }).catch(err => console.log(err))
-    }
-
-    var profileElement;
-    if (loggedin) {
-        profileElement = (<ProfileDropdown handleOnClick={handleOnClick}></ProfileDropdown>)
-    } else {
-        profileElement = (<LoginRegister></LoginRegister>)
+        dispatch({ type: SIGNOUT })
     }
 
     return (
@@ -46,7 +27,9 @@ function TopNav(prop) {
                     </button>
                     <Link to={'/'} className="navbar-brand text-center" style={{ "color": "white", "fontWeight": "bold" }}>UTE Library</Link>
                 </div>
-                {profileElement}
+                {user ? (
+                    <ProfileDropdown handleOnClick={handleOnClick}></ProfileDropdown>
+                ) : <LoginRegister></LoginRegister>}
             </div>
         </nav>
     )
