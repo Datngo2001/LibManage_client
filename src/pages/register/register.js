@@ -3,6 +3,7 @@ import { register } from '../../api/auth'
 import LoadingContext from '../../context/LoadingContext';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom'
+import styles from './register.module.css'
 
 export default function Register() {
   const { user, setUser } = useContext(UserContext);
@@ -42,8 +43,8 @@ export default function Register() {
   }
 
   return (
-    <div className='row justify-content-center m-0 mt-3'>
-      <div className="card col-3 shadow">
+    <div className={styles["container"]}>
+      <div className={`card col-3 shadow ${styles["register-card"]}`}>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axiosClient from '../api/_axiosClient';
 
 function useBookSearch(query, page, limit) {

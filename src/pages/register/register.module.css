@@ -1,0 +1,9 @@
+.container{
+    margin: 30px 0px;
+    padding: 10px;
+}
+.register-card{
+    margin:auto;
+    width: 300px;
+    max-width: 100%;
+}
