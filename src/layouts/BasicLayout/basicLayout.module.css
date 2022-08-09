@@ -1,0 +1,19 @@
+.container{
+    display: grid;
+    height: 100vh;
+    max-height: 100vh;
+    grid-template-areas: 
+        "topnav topnav"
+        "sidenav content";
+    grid-template-rows: 6% 94%;
+    grid-template-columns: 20% 80%;
+}
+.topnav-container{
+    grid-area: topnav;
+}
+.sidenav-container{
+    grid-area: sidenav;
+}
+.content-container{
+    grid-area: content;
+}

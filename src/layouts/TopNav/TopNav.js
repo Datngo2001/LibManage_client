@@ -38,7 +38,7 @@ function TopNav(prop) {
     }
 
     return (
-        <nav className="navbar navbar-dark" style={{ "backgroundColor": "#178eeb" }}>
+        <nav className="navbar navbar-dark" style={{ "backgroundColor": "#178eeb", height: "100%" }}>
             <div className="container-fluid">
                 <div className='d-flex justify-content-between' style={{ width: '15%' }}>
                     <button className="navbar-toggler " type="button" onClick={prop.tongleSideBar}>
