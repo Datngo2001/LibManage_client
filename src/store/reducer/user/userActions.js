@@ -1,18 +1,15 @@
 import { call, put } from 'redux-saga/effects'
-import { login, me, register as registerApi } from '../../../api/auth'
+import { login, logout, me, register as registerApi } from '../../../api/auth'
 import { updateUserProfile } from '../../../api/user'
-import { SIGNOUT, CHECK_FAILURE, CHECK_REQUEST, SIGNIN_FAILURE, SIGNIN_SUCCESS, UPDATE_PROFILE_FAILURE, UPDATE_PROFILE_SUCCESS, REGISTER_SUCCESS, REGISTER_FAILURE } from './userActionTypes'
+import { CHECK_FAILURE, SIGNIN_FAILURE, SIGNIN_SUCCESS, UPDATE_PROFILE_FAILURE, UPDATE_PROFILE_SUCCESS, REGISTER_SUCCESS, REGISTER_FAILURE, CHECK_SUCCESS, SIGNOUT_SUCCESS, SIGNOUT_FAILURE } from './userActionTypes'
 
 export function* signin({ payload }) {
     try {
         const response = yield call(login, payload)
-        debugger
-        if (response.message === 'login') {
-            yield put({
-                type: SIGNIN_SUCCESS,
-                payload: response.data
-            })
-        }
+        yield put({
+            type: SIGNIN_SUCCESS,
+            payload: response.data
+        })
     } catch (error) {
         yield put({
             type: SIGNIN_FAILURE,
@@ -22,20 +19,27 @@ export function* signin({ payload }) {
 }
 
 export function* signout() {
-    yield put({
-        type: SIGNOUT,
-    })
+    try {
+        const response = yield call(logout)
+        yield put({
+            type: SIGNOUT_SUCCESS,
+            payload: response.data
+        })
+    } catch (error) {
+        yield put({
+            type: SIGNOUT_FAILURE,
+            payload: error
+        })
+    }
 }
 
 export function* check() {
     try {
         const response = yield call(me)
-        if (response.status === 200) {
-            yield put({
-                type: CHECK_REQUEST,
-                payload: response.data
-            })
-        }
+        yield put({
+            type: CHECK_SUCCESS,
+            payload: response.data
+        })
     } catch (error) {
         yield put({
             type: CHECK_FAILURE,
@@ -47,12 +51,10 @@ export function* check() {
 export function* updateProfile({ payload }) {
     try {
         const response = yield call(updateUserProfile, payload)
-        if (response.status === 200) {
-            yield put({
-                type: UPDATE_PROFILE_SUCCESS,
-                payload: response.data
-            })
-        }
+        yield put({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: response.data
+        })
     } catch (error) {
         yield put({
             type: UPDATE_PROFILE_FAILURE,
@@ -64,12 +66,10 @@ export function* updateProfile({ payload }) {
 export function* register({ payload }) {
     try {
         const response = yield call(registerApi, payload)
-        if (response.status === 200) {
-            yield put({
-                type: REGISTER_SUCCESS,
-                payload: response.data
-            })
-        }
+        yield put({
+            type: REGISTER_SUCCESS,
+            payload: response.data
+        })
     } catch (error) {
         yield put({
             type: REGISTER_FAILURE,

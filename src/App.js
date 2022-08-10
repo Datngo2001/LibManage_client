@@ -10,12 +10,12 @@ import { faHome, faUser, faComputer, faBook, faTentArrowTurnLeft, faCheck, faWar
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import ToastContext from './context/ToastContext';
-import { Toast } from 'devextreme-react/toast';
 import { AxiosInterceptor } from './api/_axiosClient'
 import Cookies from 'universal-cookie';
 import BasicLayout from './layouts/BasicLayout/BasicLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { CHECK_REQUEST, SIGNIN_REQUEST } from "./store/reducer/user/userActionTypes"
+import { CHECK_REQUEST } from "./store/reducer/user/userActionTypes"
+import ToastContainer from './components/ToastContainer/ToastContainer';
 
 library.add(fab, faHome, faUser, faComputer, faBook, faTentArrowTurnLeft,
   faCheck, faX, faXmarkCircle, faShare, faWarning, faCartShopping, faIdCard, faBookOpenReader);
@@ -28,11 +28,6 @@ function App() {
 
   // Hooks
   const dispatch = useDispatch()
-  const [toastConfig, setToastConfig] = useState({
-    isVisible: false,
-    type: 'info',
-    message: '',
-  });
   const { user } = useSelector(state => state.user)
   const [isLoading, setLoading] = useState(false)
 
@@ -41,7 +36,7 @@ function App() {
       return
     }
     dispatch({ type: CHECK_REQUEST })
-  }, [])
+  }, [dispatch, user])
 
   // Elements
   let spinnerElement;
@@ -51,31 +46,13 @@ function App() {
     spinnerElement = null
   }
 
-  // Functions
-  function onHidingToast() {
-    setToastConfig({
-      ...toastConfig,
-      isVisible: false,
-    });
-  }
-
   return (
     <div className="App d-block h-100">
       <LoadingContext.Provider value={setLoading}>
-        <ToastContext.Provider value={{ toastConfig, setToastConfig }}>
-          <AxiosInterceptor>
-            <BasicLayout></BasicLayout>
-          </AxiosInterceptor>
-        </ToastContext.Provider>
+        <BasicLayout></BasicLayout>
       </LoadingContext.Provider>
       {spinnerElement}
-      <Toast
-        visible={toastConfig.isVisible}
-        message={toastConfig.message}
-        type={toastConfig.type}
-        onHiding={onHidingToast}
-        displayTime={2000}
-      />
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

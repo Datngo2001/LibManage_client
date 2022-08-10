@@ -1,19 +1,17 @@
 .container{
-    display: grid;
-    height: 100vh;
-    max-height: 100vh;
-    grid-template-areas: 
-        "topnav topnav"
-        "sidenav content";
-    grid-template-rows: 6% 94%;
-    grid-template-columns: 20% 80%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-.topnav-container{
-    grid-area: topnav;
+.body-container{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
 }
 .sidenav-container{
-    grid-area: sidenav;
+    flex-basis: 400px;
+    flex-shrink: 0;
 }
-.content-container{
-    grid-area: content;
+.route-container{
+    flex-grow: 1;
 }

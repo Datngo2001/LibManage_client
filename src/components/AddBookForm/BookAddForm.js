@@ -12,7 +12,6 @@ import { createBook, deleteBook, getBook, getBookById, updateBook } from '../../
 import { getBookTitleById } from '../../api/bookTitle';
 
 function BookAddForm(prop) {
-    debugger
     const setLoading = useContext(LoadingContext);
     const [bookTitle, setBookTitle] = useState({});
     const [inputs, setInputs] = useState({});

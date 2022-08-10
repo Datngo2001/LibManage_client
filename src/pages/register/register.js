@@ -1,17 +1,14 @@
-import { useContext, useState } from 'react'
-import { register } from '../../api/auth'
-import LoadingContext from '../../context/LoadingContext';
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import styles from './register.module.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER_REQUEST } from '../../store/reducer/user/userActionTypes';
 
 export default function Register() {
   const dispatch = useDispatch()
-  // const { user } = useSelector(state => state.user)
-  const setLoading = useContext(LoadingContext);
+  const { user } = useSelector(state => state.user)
   const [inputs, setInputs] = useState({});
-  const navigate = useNavigate();
+
+
 
   const renderNotMatch = () => {
     if (inputs.password !== inputs.repeatPassword) {
@@ -30,7 +27,6 @@ export default function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true)
 
     dispatch({
       type: REGISTER_REQUEST,
@@ -39,9 +35,6 @@ export default function Register() {
         password: inputs.password
       }
     })
-
-    navigate('/login');
-    setLoading(false);
   }
 
   return (

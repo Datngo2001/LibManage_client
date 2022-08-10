@@ -5,6 +5,7 @@ import TopNav from "../TopNav/TopNav";
 import AppRoutes from "../../routes/AppRoutes";
 import SideNav from "../SideNav/SideNav";
 import { useSelector } from "react-redux";
+import Footer from "../Footer/Footer";
 
 function BasicLayout() {
   const [sideBarVisible, setSideBarVisible] = useState(true);
@@ -16,16 +17,21 @@ function BasicLayout() {
 
   return (
     <div className={styles["container"]}>
-      <div className={styles["topnav-container"]}>
+      <div className={styles["header-container"]}>
         <TopNav tongleSideBar={tongleSideBar}></TopNav>
       </div>
-      <div className={styles["sidenav-container"]}>
+      <div className={styles["body-container"]}>
         {sideBarVisible ? (
-          <SideNav userPermissions={user?.permissionCodes}></SideNav>
+          <div className={styles["sidenav-container"]}>
+            <SideNav userPermissions={user?.permissionCodes}></SideNav>
+          </div>
         ) : null}
+        <div className={styles["route-container"]}>
+          <AppRoutes permissions={user?.permissionCodes}></AppRoutes>
+        </div>
       </div>
-      <div className={styles["content-container"]}>
-        <AppRoutes permissions={user?.permissionCodes}></AppRoutes>
+      <div className={styles["footer-container"]}>
+        <Footer></Footer>
       </div>
     </div>
   );

@@ -1,8 +1,19 @@
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGNOUT_REQUEST } from '../../store/reducer/user/userActionTypes';
 
-function ProfileDropdown(props) {
-    const { user } = useSelector(state => state.user);
+function ProfileDropdown() {
+    const dispatch = useDispatch()
+    const { user, loading } = useSelector(state => state.user);
+
+    const navigate = useNavigate()
+    if (user == null) {
+        navigate('/home')
+    }
+
+    const handleOnClick = () => {
+        dispatch({ type: SIGNOUT_REQUEST, payload: {} })
+    }
 
     return (
         <div className="dropdown" >
@@ -10,10 +21,16 @@ function ProfileDropdown(props) {
                 {user.username}
             </button>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                {/* <li><a className="dropdown-item" href="#">Profile</a></li>
-                <li><a className="dropdown-item" href="#">Logout</a></li> */}
                 <li><Link to={'profile'} className="dropdown-item">Profile</Link></li>
-                <li><span className="dropdown-item" onClick={props.handleOnClick}>Logout</span></li>
+                <li>
+                    {loading ? (
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    ) : (
+                        <span className="dropdown-item" onClick={handleOnClick}>Logout</span>
+                    )}
+                </li>
             </ul>
         </div>
     )

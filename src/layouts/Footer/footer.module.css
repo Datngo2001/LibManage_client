@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f6f6;
+}
+.container span{
+    font-size: 1rem;
+}

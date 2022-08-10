@@ -83,7 +83,7 @@ function Cart() {
         <div className="container pt-2">
             <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-12">
-                    <div className="card card-registration card-registration-2" style={{ "border-radius": "15px;" }}>
+                    <div className="card card-registration card-registration-2" style={{ borderRadius: "15px" }}>
                         <div className="card-body p-0">
                             <div className="row g-0">
                                 <div className="col-lg-8">

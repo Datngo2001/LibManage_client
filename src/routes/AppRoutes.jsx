@@ -3,7 +3,7 @@ import GroupManage from "../pages/groupManage/GroupManage";
 import UserManage from "../pages/userManage/UserManage";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home/home";
-import Login from "../pages/login/login";
+import Login from "../pages/login/Login";
 import Register from "../pages/register/register";
 import ReaderProfile from "../pages/readerProfile/readerProfile";
 import BrowsingBooks from "../pages/BrowsingBooks/BrowsingBooks";
@@ -54,10 +54,6 @@ function AppRoutes(prop) {
       pers: [],
       route: <Route key={8} path="/readercard" element={<ReaderCard />} />,
     },
-    {
-      pers: [],
-      route: <Route key={9} path="/cart" element={<Cart />} />,
-    },
   ];
 
   //Fuction
@@ -85,6 +81,7 @@ function AppRoutes(prop) {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/books" element={<BrowsingBooks />} />
+      <Route path="/cart" element={<Cart />} />
       {renderRestrictedRoutes()}
     </Routes>
   );
