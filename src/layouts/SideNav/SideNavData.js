@@ -12,7 +12,7 @@ const navData = [
         link: '/books'
     },
     {
-        pers: [],
+        pers: [5],
         name: 'Reader Card',
         icon: ['fa-solid', 'fa-id-card'],
         link: '/readercard'

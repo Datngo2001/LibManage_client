@@ -40,7 +40,7 @@ const errorMiddleware = error => {
     store.dispatch({
         type: START, payload: {
             isVisible: true,
-            type: "success",
+            type: "error",
             message: error.response.data.message,
         }
     })
